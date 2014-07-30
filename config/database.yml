@@ -18,6 +18,6 @@ test:
 production:
   adapter: postgresql
   encoding: unicode
-  database: wedding_prod
+  database: wedding
   pool: 5
   timeout: 5000
