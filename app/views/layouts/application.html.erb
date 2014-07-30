@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-site-verification" content="HsEprOL-E5JYHVMK20vSd6Ver7mJQwUnuLQpljgFoig" />
+    <title><%= content_for?(:page_title) ? yield(:page_title) : "Jeff & Krista's Wedding" %></title>
+    <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "Wedding" %>">
+    <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true %>
+    <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+
+    <%= stylesheet_link_tag 'http://fonts.googleapis.com/css?family=Sorts+Mill+Goudy', media: "all" %>
+    <%= stylesheet_link_tag 'http://fonts.googleapis.com/css?family=Diplomata+SC', media: "all" %>
+
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
+    <header>
+      <%= render 'layouts/navigation' %>
+    </header>
+    <main role="main">
+       <%= render 'layouts/messages' %>
+       <%= yield %>
+    </main>
+  </body>
+  <footer>
+    <%= render 'layouts/footer' %>
+  </footer>
+</html>

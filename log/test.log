@@ -1,0 +1,1141 @@
+  [1m[36m (108.7ms)[0m  [1mDROP DATABASE IF EXISTS "wedding_test"[0m
+  [1m[35m (231.0ms)[0m  CREATE DATABASE "wedding_test" ENCODING = 'unicode'
+  [1m[36mSQL (1.0ms)[0m  [1mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35m (3.0ms)[0m  CREATE TABLE "guest_categories" ("id" serial primary key, "name" character varying(255), "default_likelihood" integer, "created_at" timestamp, "updated_at" timestamp) 
+  [1m[36m (2.2ms)[0m  [1mCREATE TABLE "guests" ("id" serial primary key, "first" character varying(255), "last" character varying(255), "invited_adults" integer, "likelihood" integer, "guest_category_id" integer, "rsvp_adults" integer, "rsvp_children" integer, "address" character varying(255), "city" character varying(255), "state" character varying(255), "zip" character varying(255), "relationship" character varying(255), "comments" character varying(255), "created_at" timestamp, "updated_at" timestamp, "guest_first" character varying(255), "ext_id" character varying(255), "invited_children" integer, "guest_last" character varying(255)) [0m
+  [1m[35m (0.6ms)[0m  CREATE INDEX "index_guests_on_guest_category_id" ON "guests" USING btree ("guest_category_id")
+  [1m[36m (2.1ms)[0m  [1mCREATE TABLE "posts" ("id" serial primary key, "name" character varying(255), "email" character varying(255), "message" text, "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35m (0.5ms)[0m  CREATE TABLE "schema_migrations" ("version" character varying(255) NOT NULL) 
+  [1m[36m (0.7ms)[0m  [1mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [1m[35m (0.2ms)[0m  SELECT version FROM "schema_migrations"
+  [1m[36m (0.3ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20140223194125')[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.1ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36m (111.1ms)[0m  [1mDROP DATABASE IF EXISTS "wedding_test"[0m
+  [1m[35m (316.6ms)[0m  CREATE DATABASE "wedding_test" ENCODING = 'unicode'
+  [1m[36mSQL (1.0ms)[0m  [1mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35m (2.9ms)[0m  CREATE TABLE "guest_categories" ("id" serial primary key, "name" character varying(255), "default_likelihood" integer, "created_at" timestamp, "updated_at" timestamp) 
+  [1m[36m (2.4ms)[0m  [1mCREATE TABLE "guests" ("id" serial primary key, "first" character varying(255), "last" character varying(255), "invited_adults" integer, "likelihood" integer, "guest_category_id" integer, "rsvp_adults" integer, "rsvp_children" integer, "address" character varying(255), "city" character varying(255), "state" character varying(255), "zip" character varying(255), "relationship" character varying(255), "comments" character varying(255), "created_at" timestamp, "updated_at" timestamp, "guest_first" character varying(255), "ext_id" character varying(255), "invited_children" integer, "guest_last" character varying(255)) [0m
+  [1m[35m (0.7ms)[0m  CREATE INDEX "index_guests_on_guest_category_id" ON "guests" USING btree ("guest_category_id")
+  [1m[36m (2.2ms)[0m  [1mCREATE TABLE "posts" ("id" serial primary key, "name" character varying(255), "email" character varying(255), "message" text, "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35m (2.1ms)[0m  CREATE TABLE "rsvps" ("id" serial primary key, "invited_guest_name" character varying(255), "plus_one" boolean, "plus_one_name" character varying(255), "meal" character varying(255), "created_at" timestamp, "updated_at" timestamp) 
+  [1m[36m (0.5ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" character varying(255) NOT NULL) [0m
+  [1m[35m (0.7ms)[0m  CREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")
+  [1m[36m (0.2ms)[0m  [1mSELECT version FROM "schema_migrations"[0m
+  [1m[35m (0.4ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20140602020838')
+  [1m[36m (0.3ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20140223194125')[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.1ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.5ms)[0m  ALTER TABLE "guest_categories" DISABLE TRIGGER ALL;ALTER TABLE "guests" DISABLE TRIGGER ALL;ALTER TABLE "posts" DISABLE TRIGGER ALL;ALTER TABLE "rsvps" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mFixture Delete (0.2ms)[0m  DELETE FROM "posts"
+  [1m[36mFixture Insert (0.3ms)[0m  [1mINSERT INTO "posts" ("name", "email", "message", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyText', '2014-06-02 03:26:47', '2014-06-02 03:26:47', 980190962)[0m
+  [1m[35mFixture Insert (0.3ms)[0m  INSERT INTO "posts" ("name", "email", "message", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyText', '2014-06-02 03:26:47', '2014-06-02 03:26:47', 298486374)
+  [1m[36mFixture Delete (0.3ms)[0m  [1mDELETE FROM "rsvps"[0m
+  [1m[35mFixture Insert (0.3ms)[0m  INSERT INTO "rsvps" ("invited_guest_name", "plus_one?", "plus_one_name", "meal", "created_at", "updated_at", "id") VALUES ('MyString', 'f', 'MyString', 'MyString', '2014-06-02 03:26:47', '2014-06-02 03:26:47', 980190962)
+PG::UndefinedColumn: ERROR:  column "plus_one?" of relation "rsvps" does not exist
+LINE 1: INSERT INTO "rsvps" ("invited_guest_name", "plus_one?", "plu...
+                                                   ^
+: INSERT INTO "rsvps" ("invited_guest_name", "plus_one?", "plus_one_name", "meal", "created_at", "updated_at", "id") VALUES ('MyString', 'f', 'MyString', 'MyString', '2014-06-02 03:26:47', '2014-06-02 03:26:47', 980190962)
+  [1m[36m (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  ALTER TABLE "guest_categories" ENABLE TRIGGER ALL;ALTER TABLE "guests" ENABLE TRIGGER ALL;ALTER TABLE "posts" ENABLE TRIGGER ALL;ALTER TABLE "rsvps" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL
+  [1m[36m (111.9ms)[0m  [1mDROP DATABASE IF EXISTS "wedding_test"[0m
+  [1m[35m (229.6ms)[0m  CREATE DATABASE "wedding_test" ENCODING = 'unicode'
+  [1m[36mSQL (1.1ms)[0m  [1mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35m (3.2ms)[0m  CREATE TABLE "guest_categories" ("id" serial primary key, "name" character varying(255), "default_likelihood" integer, "created_at" timestamp, "updated_at" timestamp) 
+  [1m[36m (2.5ms)[0m  [1mCREATE TABLE "guests" ("id" serial primary key, "first" character varying(255), "last" character varying(255), "invited_adults" integer, "likelihood" integer, "guest_category_id" integer, "rsvp_adults" integer, "rsvp_children" integer, "address" character varying(255), "city" character varying(255), "state" character varying(255), "zip" character varying(255), "relationship" character varying(255), "comments" character varying(255), "created_at" timestamp, "updated_at" timestamp, "guest_first" character varying(255), "ext_id" character varying(255), "invited_children" integer, "guest_last" character varying(255)) [0m
+  [1m[35m (0.7ms)[0m  CREATE INDEX "index_guests_on_guest_category_id" ON "guests" USING btree ("guest_category_id")
+  [1m[36m (2.3ms)[0m  [1mCREATE TABLE "posts" ("id" serial primary key, "name" character varying(255), "email" character varying(255), "message" text, "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35m (2.1ms)[0m  CREATE TABLE "rsvps" ("id" serial primary key, "invited_guest_name" character varying(255), "plus_one" boolean, "plus_one_name" character varying(255), "meal" character varying(255), "created_at" timestamp, "updated_at" timestamp) 
+  [1m[36m (0.4ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" character varying(255) NOT NULL) [0m
+  [1m[35m (0.8ms)[0m  CREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")
+  [1m[36m (0.2ms)[0m  [1mSELECT version FROM "schema_migrations"[0m
+  [1m[35m (0.4ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20140602020838')
+  [1m[36m (0.3ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20140223194125')[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.2ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.5ms)[0m  ALTER TABLE "guest_categories" DISABLE TRIGGER ALL;ALTER TABLE "guests" DISABLE TRIGGER ALL;ALTER TABLE "posts" DISABLE TRIGGER ALL;ALTER TABLE "rsvps" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mFixture Delete (0.2ms)[0m  DELETE FROM "posts"
+  [1m[36mFixture Insert (0.3ms)[0m  [1mINSERT INTO "posts" ("name", "email", "message", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyText', '2014-06-02 03:31:18', '2014-06-02 03:31:18', 980190962)[0m
+  [1m[35mFixture Insert (0.1ms)[0m  INSERT INTO "posts" ("name", "email", "message", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyText', '2014-06-02 03:31:18', '2014-06-02 03:31:18', 298486374)
+  [1m[36mFixture Delete (0.2ms)[0m  [1mDELETE FROM "rsvps"[0m
+  [1m[35mFixture Insert (0.2ms)[0m  INSERT INTO "rsvps" ("invited_guest_name", "plus_one", "plus_one_name", "meal", "created_at", "updated_at", "id") VALUES ('Guest1', 'f', NULL, 'beef', '2014-06-02 03:31:18', '2014-06-02 03:31:18', 980190962)
+  [1m[36mFixture Insert (0.1ms)[0m  [1mINSERT INTO "rsvps" ("invited_guest_name", "plus_one", "plus_one_name", "meal", "created_at", "updated_at", "id") VALUES ('Guest1', 't', 'Guest_1_Guest', 'chicken', '2014-06-02 03:31:18', '2014-06-02 03:31:18', 298486374)[0m
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.2ms)[0m  [1mALTER TABLE "guest_categories" ENABLE TRIGGER ALL;ALTER TABLE "guests" ENABLE TRIGGER ALL;ALTER TABLE "posts" ENABLE TRIGGER ALL;ALTER TABLE "rsvps" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+---------------------------------------------------
+RsvpTest: test_spreadsheet_rows_get_created_on_save
+---------------------------------------------------
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (1.1ms)[0m  INSERT INTO "rsvps" ("created_at", "invited_guest_name", "meal", "plus_one", "plus_one_name", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["created_at", Mon, 02 Jun 2014 03:31:19 UTC +00:00], ["invited_guest_name", "Automated Test"], ["meal", "bits"], ["plus_one", true], ["plus_one_name", "Automated Test Guest"], ["updated_at", Mon, 02 Jun 2014 03:31:19 UTC +00:00]]
+  [1m[36m (0.2ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  ROLLBACK
+  [1m[36m (111.6ms)[0m  [1mDROP DATABASE IF EXISTS "wedding_test"[0m
+  [1m[35m (226.8ms)[0m  CREATE DATABASE "wedding_test" ENCODING = 'unicode'
+  [1m[36mSQL (0.8ms)[0m  [1mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35m (3.3ms)[0m  CREATE TABLE "guest_categories" ("id" serial primary key, "name" character varying(255), "default_likelihood" integer, "created_at" timestamp, "updated_at" timestamp) 
+  [1m[36m (2.2ms)[0m  [1mCREATE TABLE "guests" ("id" serial primary key, "first" character varying(255), "last" character varying(255), "invited_adults" integer, "likelihood" integer, "guest_category_id" integer, "rsvp_adults" integer, "rsvp_children" integer, "address" character varying(255), "city" character varying(255), "state" character varying(255), "zip" character varying(255), "relationship" character varying(255), "comments" character varying(255), "created_at" timestamp, "updated_at" timestamp, "guest_first" character varying(255), "ext_id" character varying(255), "invited_children" integer, "guest_last" character varying(255)) [0m
+  [1m[35m (0.6ms)[0m  CREATE INDEX "index_guests_on_guest_category_id" ON "guests" USING btree ("guest_category_id")
+  [1m[36m (2.5ms)[0m  [1mCREATE TABLE "posts" ("id" serial primary key, "name" character varying(255), "email" character varying(255), "message" text, "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35m (2.0ms)[0m  CREATE TABLE "rsvps" ("id" serial primary key, "invited_guest_name" character varying(255), "plus_one" boolean, "plus_one_name" character varying(255), "meal" character varying(255), "created_at" timestamp, "updated_at" timestamp) 
+  [1m[36m (0.5ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" character varying(255) NOT NULL) [0m
+  [1m[35m (0.7ms)[0m  CREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")
+  [1m[36m (0.2ms)[0m  [1mSELECT version FROM "schema_migrations"[0m
+  [1m[35m (0.3ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20140602020838')
+  [1m[36m (0.3ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20140223194125')[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.1ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.6ms)[0m  ALTER TABLE "guest_categories" DISABLE TRIGGER ALL;ALTER TABLE "guests" DISABLE TRIGGER ALL;ALTER TABLE "posts" DISABLE TRIGGER ALL;ALTER TABLE "rsvps" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mFixture Delete (0.2ms)[0m  DELETE FROM "posts"
+  [1m[36mFixture Insert (0.3ms)[0m  [1mINSERT INTO "posts" ("name", "email", "message", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyText', '2014-06-02 03:31:54', '2014-06-02 03:31:54', 980190962)[0m
+  [1m[35mFixture Insert (0.1ms)[0m  INSERT INTO "posts" ("name", "email", "message", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyText', '2014-06-02 03:31:54', '2014-06-02 03:31:54', 298486374)
+  [1m[36mFixture Delete (0.2ms)[0m  [1mDELETE FROM "rsvps"[0m
+  [1m[35mFixture Insert (0.2ms)[0m  INSERT INTO "rsvps" ("invited_guest_name", "plus_one", "plus_one_name", "meal", "created_at", "updated_at", "id") VALUES ('Guest1', 'f', NULL, 'beef', '2014-06-02 03:31:54', '2014-06-02 03:31:54', 980190962)
+  [1m[36mFixture Insert (0.1ms)[0m  [1mINSERT INTO "rsvps" ("invited_guest_name", "plus_one", "plus_one_name", "meal", "created_at", "updated_at", "id") VALUES ('Guest1', 't', 'Guest_1_Guest', 'chicken', '2014-06-02 03:31:54', '2014-06-02 03:31:54', 298486374)[0m
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.2ms)[0m  [1mALTER TABLE "guest_categories" ENABLE TRIGGER ALL;ALTER TABLE "guests" ENABLE TRIGGER ALL;ALTER TABLE "posts" ENABLE TRIGGER ALL;ALTER TABLE "rsvps" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+---------------------------------------------------
+RsvpTest: test_spreadsheet_rows_get_created_on_save
+---------------------------------------------------
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (2.1ms)[0m  INSERT INTO "rsvps" ("created_at", "invited_guest_name", "meal", "plus_one", "plus_one_name", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["created_at", Mon, 02 Jun 2014 03:31:55 UTC +00:00], ["invited_guest_name", "Automated Test"], ["meal", "bits"], ["plus_one", true], ["plus_one_name", "Automated Test Guest"], ["updated_at", Mon, 02 Jun 2014 03:31:55 UTC +00:00]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.3ms)[0m  ROLLBACK
+  [1m[36m (111.9ms)[0m  [1mDROP DATABASE IF EXISTS "wedding_test"[0m
+  [1m[35m (230.6ms)[0m  CREATE DATABASE "wedding_test" ENCODING = 'unicode'
+  [1m[36mSQL (0.9ms)[0m  [1mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35m (2.9ms)[0m  CREATE TABLE "guest_categories" ("id" serial primary key, "name" character varying(255), "default_likelihood" integer, "created_at" timestamp, "updated_at" timestamp) 
+  [1m[36m (2.4ms)[0m  [1mCREATE TABLE "guests" ("id" serial primary key, "first" character varying(255), "last" character varying(255), "invited_adults" integer, "likelihood" integer, "guest_category_id" integer, "rsvp_adults" integer, "rsvp_children" integer, "address" character varying(255), "city" character varying(255), "state" character varying(255), "zip" character varying(255), "relationship" character varying(255), "comments" character varying(255), "created_at" timestamp, "updated_at" timestamp, "guest_first" character varying(255), "ext_id" character varying(255), "invited_children" integer, "guest_last" character varying(255)) [0m
+  [1m[35m (0.8ms)[0m  CREATE INDEX "index_guests_on_guest_category_id" ON "guests" USING btree ("guest_category_id")
+  [1m[36m (2.2ms)[0m  [1mCREATE TABLE "posts" ("id" serial primary key, "name" character varying(255), "email" character varying(255), "message" text, "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35m (2.0ms)[0m  CREATE TABLE "rsvps" ("id" serial primary key, "invited_guest_name" character varying(255), "plus_one" boolean, "plus_one_name" character varying(255), "meal" character varying(255), "created_at" timestamp, "updated_at" timestamp) 
+  [1m[36m (0.5ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" character varying(255) NOT NULL) [0m
+  [1m[35m (0.7ms)[0m  CREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")
+  [1m[36m (0.2ms)[0m  [1mSELECT version FROM "schema_migrations"[0m
+  [1m[35m (0.4ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20140602020838')
+  [1m[36m (0.3ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20140223194125')[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.1ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.5ms)[0m  ALTER TABLE "guest_categories" DISABLE TRIGGER ALL;ALTER TABLE "guests" DISABLE TRIGGER ALL;ALTER TABLE "posts" DISABLE TRIGGER ALL;ALTER TABLE "rsvps" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mFixture Delete (0.2ms)[0m  DELETE FROM "posts"
+  [1m[36mFixture Insert (0.3ms)[0m  [1mINSERT INTO "posts" ("name", "email", "message", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyText', '2014-06-02 03:32:14', '2014-06-02 03:32:14', 980190962)[0m
+  [1m[35mFixture Insert (0.1ms)[0m  INSERT INTO "posts" ("name", "email", "message", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyText', '2014-06-02 03:32:14', '2014-06-02 03:32:14', 298486374)
+  [1m[36mFixture Delete (0.2ms)[0m  [1mDELETE FROM "rsvps"[0m
+  [1m[35mFixture Insert (0.2ms)[0m  INSERT INTO "rsvps" ("invited_guest_name", "plus_one", "plus_one_name", "meal", "created_at", "updated_at", "id") VALUES ('Guest1', 'f', NULL, 'beef', '2014-06-02 03:32:14', '2014-06-02 03:32:14', 980190962)
+  [1m[36mFixture Insert (0.1ms)[0m  [1mINSERT INTO "rsvps" ("invited_guest_name", "plus_one", "plus_one_name", "meal", "created_at", "updated_at", "id") VALUES ('Guest1', 't', 'Guest_1_Guest', 'chicken', '2014-06-02 03:32:14', '2014-06-02 03:32:14', 298486374)[0m
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.2ms)[0m  [1mALTER TABLE "guest_categories" ENABLE TRIGGER ALL;ALTER TABLE "guests" ENABLE TRIGGER ALL;ALTER TABLE "posts" ENABLE TRIGGER ALL;ALTER TABLE "rsvps" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+---------------------------------------------------
+RsvpTest: test_spreadsheet_rows_get_created_on_save
+---------------------------------------------------
+  [1m[36m (0.2ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (1.2ms)[0m  INSERT INTO "rsvps" ("created_at", "invited_guest_name", "meal", "plus_one", "plus_one_name", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["created_at", Mon, 02 Jun 2014 03:32:15 UTC +00:00], ["invited_guest_name", "Automated Test"], ["meal", "bits"], ["plus_one", true], ["plus_one_name", "Automated Test Guest"], ["updated_at", Mon, 02 Jun 2014 03:32:15 UTC +00:00]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.3ms)[0m  ROLLBACK
+  [1m[36m (112.0ms)[0m  [1mDROP DATABASE IF EXISTS "wedding_test"[0m
+  [1m[35m (231.0ms)[0m  CREATE DATABASE "wedding_test" ENCODING = 'unicode'
+  [1m[36mSQL (1.0ms)[0m  [1mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35m (3.2ms)[0m  CREATE TABLE "guest_categories" ("id" serial primary key, "name" character varying(255), "default_likelihood" integer, "created_at" timestamp, "updated_at" timestamp) 
+  [1m[36m (2.8ms)[0m  [1mCREATE TABLE "guests" ("id" serial primary key, "first" character varying(255), "last" character varying(255), "invited_adults" integer, "likelihood" integer, "guest_category_id" integer, "rsvp_adults" integer, "rsvp_children" integer, "address" character varying(255), "city" character varying(255), "state" character varying(255), "zip" character varying(255), "relationship" character varying(255), "comments" character varying(255), "created_at" timestamp, "updated_at" timestamp, "guest_first" character varying(255), "ext_id" character varying(255), "invited_children" integer, "guest_last" character varying(255)) [0m
+  [1m[35m (0.7ms)[0m  CREATE INDEX "index_guests_on_guest_category_id" ON "guests" USING btree ("guest_category_id")
+  [1m[36m (2.3ms)[0m  [1mCREATE TABLE "posts" ("id" serial primary key, "name" character varying(255), "email" character varying(255), "message" text, "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35m (2.0ms)[0m  CREATE TABLE "rsvps" ("id" serial primary key, "invited_guest_name" character varying(255), "plus_one" boolean, "plus_one_name" character varying(255), "meal" character varying(255), "created_at" timestamp, "updated_at" timestamp) 
+  [1m[36m (0.5ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" character varying(255) NOT NULL) [0m
+  [1m[35m (0.7ms)[0m  CREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")
+  [1m[36m (0.2ms)[0m  [1mSELECT version FROM "schema_migrations"[0m
+  [1m[35m (0.4ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20140602020838')
+  [1m[36m (0.3ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20140223194125')[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.1ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.5ms)[0m  ALTER TABLE "guest_categories" DISABLE TRIGGER ALL;ALTER TABLE "guests" DISABLE TRIGGER ALL;ALTER TABLE "posts" DISABLE TRIGGER ALL;ALTER TABLE "rsvps" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mFixture Delete (0.2ms)[0m  DELETE FROM "posts"
+  [1m[36mFixture Insert (0.4ms)[0m  [1mINSERT INTO "posts" ("name", "email", "message", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyText', '2014-06-02 03:32:34', '2014-06-02 03:32:34', 980190962)[0m
+  [1m[35mFixture Insert (0.2ms)[0m  INSERT INTO "posts" ("name", "email", "message", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyText', '2014-06-02 03:32:34', '2014-06-02 03:32:34', 298486374)
+  [1m[36mFixture Delete (0.3ms)[0m  [1mDELETE FROM "rsvps"[0m
+  [1m[35mFixture Insert (0.3ms)[0m  INSERT INTO "rsvps" ("invited_guest_name", "plus_one", "plus_one_name", "meal", "created_at", "updated_at", "id") VALUES ('Guest1', 'f', NULL, 'beef', '2014-06-02 03:32:34', '2014-06-02 03:32:34', 980190962)
+  [1m[36mFixture Insert (0.1ms)[0m  [1mINSERT INTO "rsvps" ("invited_guest_name", "plus_one", "plus_one_name", "meal", "created_at", "updated_at", "id") VALUES ('Guest1', 't', 'Guest_1_Guest', 'chicken', '2014-06-02 03:32:34', '2014-06-02 03:32:34', 298486374)[0m
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.2ms)[0m  [1mALTER TABLE "guest_categories" ENABLE TRIGGER ALL;ALTER TABLE "guests" ENABLE TRIGGER ALL;ALTER TABLE "posts" ENABLE TRIGGER ALL;ALTER TABLE "rsvps" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+---------------------------------------------------
+RsvpTest: test_spreadsheet_rows_get_created_on_save
+---------------------------------------------------
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (1.2ms)[0m  INSERT INTO "rsvps" ("created_at", "invited_guest_name", "meal", "plus_one", "plus_one_name", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["created_at", Mon, 02 Jun 2014 03:32:35 UTC +00:00], ["invited_guest_name", "Automated Test"], ["meal", "bits"], ["plus_one", true], ["plus_one_name", "Automated Test Guest"], ["updated_at", Mon, 02 Jun 2014 03:32:35 UTC +00:00]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  ROLLBACK
+  [1m[36m (111.7ms)[0m  [1mDROP DATABASE IF EXISTS "wedding_test"[0m
+  [1m[35m (230.7ms)[0m  CREATE DATABASE "wedding_test" ENCODING = 'unicode'
+  [1m[36mSQL (0.9ms)[0m  [1mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35m (3.0ms)[0m  CREATE TABLE "guest_categories" ("id" serial primary key, "name" character varying(255), "default_likelihood" integer, "created_at" timestamp, "updated_at" timestamp) 
+  [1m[36m (2.3ms)[0m  [1mCREATE TABLE "guests" ("id" serial primary key, "first" character varying(255), "last" character varying(255), "invited_adults" integer, "likelihood" integer, "guest_category_id" integer, "rsvp_adults" integer, "rsvp_children" integer, "address" character varying(255), "city" character varying(255), "state" character varying(255), "zip" character varying(255), "relationship" character varying(255), "comments" character varying(255), "created_at" timestamp, "updated_at" timestamp, "guest_first" character varying(255), "ext_id" character varying(255), "invited_children" integer, "guest_last" character varying(255)) [0m
+  [1m[35m (0.7ms)[0m  CREATE INDEX "index_guests_on_guest_category_id" ON "guests" USING btree ("guest_category_id")
+  [1m[36m (2.2ms)[0m  [1mCREATE TABLE "posts" ("id" serial primary key, "name" character varying(255), "email" character varying(255), "message" text, "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35m (2.1ms)[0m  CREATE TABLE "rsvps" ("id" serial primary key, "invited_guest_name" character varying(255), "plus_one" boolean, "plus_one_name" character varying(255), "meal" character varying(255), "created_at" timestamp, "updated_at" timestamp) 
+  [1m[36m (0.6ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" character varying(255) NOT NULL) [0m
+  [1m[35m (0.9ms)[0m  CREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")
+  [1m[36m (0.2ms)[0m  [1mSELECT version FROM "schema_migrations"[0m
+  [1m[35m (0.4ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20140602020838')
+  [1m[36m (0.3ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20140223194125')[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.1ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.5ms)[0m  ALTER TABLE "guest_categories" DISABLE TRIGGER ALL;ALTER TABLE "guests" DISABLE TRIGGER ALL;ALTER TABLE "posts" DISABLE TRIGGER ALL;ALTER TABLE "rsvps" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mFixture Delete (0.2ms)[0m  DELETE FROM "posts"
+  [1m[36mFixture Insert (0.3ms)[0m  [1mINSERT INTO "posts" ("name", "email", "message", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyText', '2014-06-02 03:32:50', '2014-06-02 03:32:50', 980190962)[0m
+  [1m[35mFixture Insert (0.1ms)[0m  INSERT INTO "posts" ("name", "email", "message", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyText', '2014-06-02 03:32:50', '2014-06-02 03:32:50', 298486374)
+  [1m[36mFixture Delete (0.2ms)[0m  [1mDELETE FROM "rsvps"[0m
+  [1m[35mFixture Insert (0.2ms)[0m  INSERT INTO "rsvps" ("invited_guest_name", "plus_one", "plus_one_name", "meal", "created_at", "updated_at", "id") VALUES ('Guest1', 'f', NULL, 'beef', '2014-06-02 03:32:50', '2014-06-02 03:32:50', 980190962)
+  [1m[36mFixture Insert (0.1ms)[0m  [1mINSERT INTO "rsvps" ("invited_guest_name", "plus_one", "plus_one_name", "meal", "created_at", "updated_at", "id") VALUES ('Guest1', 't', 'Guest_1_Guest', 'chicken', '2014-06-02 03:32:50', '2014-06-02 03:32:50', 298486374)[0m
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.2ms)[0m  [1mALTER TABLE "guest_categories" ENABLE TRIGGER ALL;ALTER TABLE "guests" ENABLE TRIGGER ALL;ALTER TABLE "posts" ENABLE TRIGGER ALL;ALTER TABLE "rsvps" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+---------------------------------------------------
+RsvpTest: test_spreadsheet_rows_get_created_on_save
+---------------------------------------------------
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (1.2ms)[0m  INSERT INTO "rsvps" ("created_at", "invited_guest_name", "meal", "plus_one", "plus_one_name", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["created_at", Mon, 02 Jun 2014 03:32:51 UTC +00:00], ["invited_guest_name", "Automated Test"], ["meal", "bits"], ["plus_one", true], ["plus_one_name", "Automated Test Guest"], ["updated_at", Mon, 02 Jun 2014 03:32:51 UTC +00:00]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  ROLLBACK
+  [1m[36m (111.6ms)[0m  [1mDROP DATABASE IF EXISTS "wedding_test"[0m
+  [1m[35m (224.2ms)[0m  CREATE DATABASE "wedding_test" ENCODING = 'unicode'
+  [1m[36mSQL (0.9ms)[0m  [1mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35m (3.2ms)[0m  CREATE TABLE "guest_categories" ("id" serial primary key, "name" character varying(255), "default_likelihood" integer, "created_at" timestamp, "updated_at" timestamp) 
+  [1m[36m (2.7ms)[0m  [1mCREATE TABLE "guests" ("id" serial primary key, "first" character varying(255), "last" character varying(255), "invited_adults" integer, "likelihood" integer, "guest_category_id" integer, "rsvp_adults" integer, "rsvp_children" integer, "address" character varying(255), "city" character varying(255), "state" character varying(255), "zip" character varying(255), "relationship" character varying(255), "comments" character varying(255), "created_at" timestamp, "updated_at" timestamp, "guest_first" character varying(255), "ext_id" character varying(255), "invited_children" integer, "guest_last" character varying(255)) [0m
+  [1m[35m (0.8ms)[0m  CREATE INDEX "index_guests_on_guest_category_id" ON "guests" USING btree ("guest_category_id")
+  [1m[36m (2.1ms)[0m  [1mCREATE TABLE "posts" ("id" serial primary key, "name" character varying(255), "email" character varying(255), "message" text, "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35m (1.9ms)[0m  CREATE TABLE "rsvps" ("id" serial primary key, "invited_guest_name" character varying(255), "plus_one" boolean, "plus_one_name" character varying(255), "meal" character varying(255), "created_at" timestamp, "updated_at" timestamp) 
+  [1m[36m (0.5ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" character varying(255) NOT NULL) [0m
+  [1m[35m (0.6ms)[0m  CREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")
+  [1m[36m (0.2ms)[0m  [1mSELECT version FROM "schema_migrations"[0m
+  [1m[35m (0.4ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20140602020838')
+  [1m[36m (0.3ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20140223194125')[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.1ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.8ms)[0m  ALTER TABLE "guest_categories" DISABLE TRIGGER ALL;ALTER TABLE "guests" DISABLE TRIGGER ALL;ALTER TABLE "posts" DISABLE TRIGGER ALL;ALTER TABLE "rsvps" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mFixture Delete (0.2ms)[0m  DELETE FROM "posts"
+  [1m[36mFixture Insert (0.3ms)[0m  [1mINSERT INTO "posts" ("name", "email", "message", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyText', '2014-06-02 03:32:59', '2014-06-02 03:32:59', 980190962)[0m
+  [1m[35mFixture Insert (0.1ms)[0m  INSERT INTO "posts" ("name", "email", "message", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyText', '2014-06-02 03:32:59', '2014-06-02 03:32:59', 298486374)
+  [1m[36mFixture Delete (0.2ms)[0m  [1mDELETE FROM "rsvps"[0m
+  [1m[35mFixture Insert (0.2ms)[0m  INSERT INTO "rsvps" ("invited_guest_name", "plus_one", "plus_one_name", "meal", "created_at", "updated_at", "id") VALUES ('Guest1', 'f', NULL, 'beef', '2014-06-02 03:32:59', '2014-06-02 03:32:59', 980190962)
+  [1m[36mFixture Insert (0.1ms)[0m  [1mINSERT INTO "rsvps" ("invited_guest_name", "plus_one", "plus_one_name", "meal", "created_at", "updated_at", "id") VALUES ('Guest1', 't', 'Guest_1_Guest', 'chicken', '2014-06-02 03:32:59', '2014-06-02 03:32:59', 298486374)[0m
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mALTER TABLE "guest_categories" ENABLE TRIGGER ALL;ALTER TABLE "guests" ENABLE TRIGGER ALL;ALTER TABLE "posts" ENABLE TRIGGER ALL;ALTER TABLE "rsvps" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL[0m
+  [1m[35m (0.0ms)[0m  BEGIN
+---------------------------------------------------
+RsvpTest: test_spreadsheet_rows_get_created_on_save
+---------------------------------------------------
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (1.2ms)[0m  INSERT INTO "rsvps" ("created_at", "invited_guest_name", "meal", "plus_one", "plus_one_name", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["created_at", Mon, 02 Jun 2014 03:33:00 UTC +00:00], ["invited_guest_name", "Automated Test"], ["meal", "bits"], ["plus_one", true], ["plus_one_name", "Automated Test Guest"], ["updated_at", Mon, 02 Jun 2014 03:33:00 UTC +00:00]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.3ms)[0m  ROLLBACK
+  [1m[36m (112.0ms)[0m  [1mDROP DATABASE IF EXISTS "wedding_test"[0m
+  [1m[35m (230.1ms)[0m  CREATE DATABASE "wedding_test" ENCODING = 'unicode'
+  [1m[36mSQL (0.8ms)[0m  [1mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35m (3.7ms)[0m  CREATE TABLE "guest_categories" ("id" serial primary key, "name" character varying(255), "default_likelihood" integer, "created_at" timestamp, "updated_at" timestamp) 
+  [1m[36m (3.0ms)[0m  [1mCREATE TABLE "guests" ("id" serial primary key, "first" character varying(255), "last" character varying(255), "invited_adults" integer, "likelihood" integer, "guest_category_id" integer, "rsvp_adults" integer, "rsvp_children" integer, "address" character varying(255), "city" character varying(255), "state" character varying(255), "zip" character varying(255), "relationship" character varying(255), "comments" character varying(255), "created_at" timestamp, "updated_at" timestamp, "guest_first" character varying(255), "ext_id" character varying(255), "invited_children" integer, "guest_last" character varying(255)) [0m
+  [1m[35m (0.8ms)[0m  CREATE INDEX "index_guests_on_guest_category_id" ON "guests" USING btree ("guest_category_id")
+  [1m[36m (2.0ms)[0m  [1mCREATE TABLE "posts" ("id" serial primary key, "name" character varying(255), "email" character varying(255), "message" text, "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35m (2.0ms)[0m  CREATE TABLE "rsvps" ("id" serial primary key, "invited_guest_name" character varying(255), "plus_one" boolean, "plus_one_name" character varying(255), "meal" character varying(255), "created_at" timestamp, "updated_at" timestamp) 
+  [1m[36m (0.5ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" character varying(255) NOT NULL) [0m
+  [1m[35m (0.8ms)[0m  CREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")
+  [1m[36m (0.2ms)[0m  [1mSELECT version FROM "schema_migrations"[0m
+  [1m[35m (0.4ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20140602020838')
+  [1m[36m (0.3ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20140223194125')[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.1ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.5ms)[0m  ALTER TABLE "guest_categories" DISABLE TRIGGER ALL;ALTER TABLE "guests" DISABLE TRIGGER ALL;ALTER TABLE "posts" DISABLE TRIGGER ALL;ALTER TABLE "rsvps" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mFixture Delete (0.2ms)[0m  DELETE FROM "posts"
+  [1m[36mFixture Insert (0.3ms)[0m  [1mINSERT INTO "posts" ("name", "email", "message", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyText', '2014-06-02 03:33:11', '2014-06-02 03:33:11', 980190962)[0m
+  [1m[35mFixture Insert (0.2ms)[0m  INSERT INTO "posts" ("name", "email", "message", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyText', '2014-06-02 03:33:11', '2014-06-02 03:33:11', 298486374)
+  [1m[36mFixture Delete (0.2ms)[0m  [1mDELETE FROM "rsvps"[0m
+  [1m[35mFixture Insert (0.2ms)[0m  INSERT INTO "rsvps" ("invited_guest_name", "plus_one", "plus_one_name", "meal", "created_at", "updated_at", "id") VALUES ('Guest1', 'f', NULL, 'beef', '2014-06-02 03:33:11', '2014-06-02 03:33:11', 980190962)
+  [1m[36mFixture Insert (0.1ms)[0m  [1mINSERT INTO "rsvps" ("invited_guest_name", "plus_one", "plus_one_name", "meal", "created_at", "updated_at", "id") VALUES ('Guest1', 't', 'Guest_1_Guest', 'chicken', '2014-06-02 03:33:11', '2014-06-02 03:33:11', 298486374)[0m
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.2ms)[0m  [1mALTER TABLE "guest_categories" ENABLE TRIGGER ALL;ALTER TABLE "guests" ENABLE TRIGGER ALL;ALTER TABLE "posts" ENABLE TRIGGER ALL;ALTER TABLE "rsvps" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+---------------------------------------------------
+RsvpTest: test_spreadsheet_rows_get_created_on_save
+---------------------------------------------------
+  [1m[36m (0.2ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (1.1ms)[0m  INSERT INTO "rsvps" ("created_at", "invited_guest_name", "meal", "plus_one", "plus_one_name", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["created_at", Mon, 02 Jun 2014 03:33:12 UTC +00:00], ["invited_guest_name", "Automated Test"], ["meal", "bits"], ["plus_one", true], ["plus_one_name", "Automated Test Guest"], ["updated_at", Mon, 02 Jun 2014 03:33:12 UTC +00:00]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  ROLLBACK
+  [1m[36m (110.0ms)[0m  [1mDROP DATABASE IF EXISTS "wedding_test"[0m
+  [1m[35m (230.5ms)[0m  CREATE DATABASE "wedding_test" ENCODING = 'unicode'
+  [1m[36mSQL (0.9ms)[0m  [1mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35m (3.2ms)[0m  CREATE TABLE "guest_categories" ("id" serial primary key, "name" character varying(255), "default_likelihood" integer, "created_at" timestamp, "updated_at" timestamp) 
+  [1m[36m (3.2ms)[0m  [1mCREATE TABLE "guests" ("id" serial primary key, "first" character varying(255), "last" character varying(255), "invited_adults" integer, "likelihood" integer, "guest_category_id" integer, "rsvp_adults" integer, "rsvp_children" integer, "address" character varying(255), "city" character varying(255), "state" character varying(255), "zip" character varying(255), "relationship" character varying(255), "comments" character varying(255), "created_at" timestamp, "updated_at" timestamp, "guest_first" character varying(255), "ext_id" character varying(255), "invited_children" integer, "guest_last" character varying(255)) [0m
+  [1m[35m (0.7ms)[0m  CREATE INDEX "index_guests_on_guest_category_id" ON "guests" USING btree ("guest_category_id")
+  [1m[36m (2.2ms)[0m  [1mCREATE TABLE "posts" ("id" serial primary key, "name" character varying(255), "email" character varying(255), "message" text, "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35m (2.0ms)[0m  CREATE TABLE "rsvps" ("id" serial primary key, "invited_guest_name" character varying(255), "plus_one" boolean, "plus_one_name" character varying(255), "meal" character varying(255), "created_at" timestamp, "updated_at" timestamp) 
+  [1m[36m (0.5ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" character varying(255) NOT NULL) [0m
+  [1m[35m (0.7ms)[0m  CREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")
+  [1m[36m (0.2ms)[0m  [1mSELECT version FROM "schema_migrations"[0m
+  [1m[35m (0.4ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20140602020838')
+  [1m[36m (0.3ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20140223194125')[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.2ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.5ms)[0m  ALTER TABLE "guest_categories" DISABLE TRIGGER ALL;ALTER TABLE "guests" DISABLE TRIGGER ALL;ALTER TABLE "posts" DISABLE TRIGGER ALL;ALTER TABLE "rsvps" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mFixture Delete (0.2ms)[0m  DELETE FROM "posts"
+  [1m[36mFixture Insert (0.3ms)[0m  [1mINSERT INTO "posts" ("name", "email", "message", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyText', '2014-06-02 03:33:32', '2014-06-02 03:33:32', 980190962)[0m
+  [1m[35mFixture Insert (0.1ms)[0m  INSERT INTO "posts" ("name", "email", "message", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyText', '2014-06-02 03:33:32', '2014-06-02 03:33:32', 298486374)
+  [1m[36mFixture Delete (0.2ms)[0m  [1mDELETE FROM "rsvps"[0m
+  [1m[35mFixture Insert (0.2ms)[0m  INSERT INTO "rsvps" ("invited_guest_name", "plus_one", "plus_one_name", "meal", "created_at", "updated_at", "id") VALUES ('Guest1', 'f', NULL, 'beef', '2014-06-02 03:33:32', '2014-06-02 03:33:32', 980190962)
+  [1m[36mFixture Insert (0.1ms)[0m  [1mINSERT INTO "rsvps" ("invited_guest_name", "plus_one", "plus_one_name", "meal", "created_at", "updated_at", "id") VALUES ('Guest1', 't', 'Guest_1_Guest', 'chicken', '2014-06-02 03:33:32', '2014-06-02 03:33:32', 298486374)[0m
+  [1m[35m (0.2ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mALTER TABLE "guest_categories" ENABLE TRIGGER ALL;ALTER TABLE "guests" ENABLE TRIGGER ALL;ALTER TABLE "posts" ENABLE TRIGGER ALL;ALTER TABLE "rsvps" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL[0m
+  [1m[35m (0.0ms)[0m  BEGIN
+---------------------------------------------------
+RsvpTest: test_spreadsheet_rows_get_created_on_save
+---------------------------------------------------
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (1.2ms)[0m  INSERT INTO "rsvps" ("created_at", "invited_guest_name", "meal", "plus_one", "plus_one_name", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["created_at", Mon, 02 Jun 2014 03:33:34 UTC +00:00], ["invited_guest_name", "Automated Test"], ["meal", "bits"], ["plus_one", true], ["plus_one_name", "Automated Test Guest"], ["updated_at", Mon, 02 Jun 2014 03:33:34 UTC +00:00]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  ROLLBACK
+  [1m[36m (112.1ms)[0m  [1mDROP DATABASE IF EXISTS "wedding_test"[0m
+  [1m[35m (231.3ms)[0m  CREATE DATABASE "wedding_test" ENCODING = 'unicode'
+  [1m[36mSQL (1.0ms)[0m  [1mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35m (3.0ms)[0m  CREATE TABLE "guest_categories" ("id" serial primary key, "name" character varying(255), "default_likelihood" integer, "created_at" timestamp, "updated_at" timestamp) 
+  [1m[36m (2.4ms)[0m  [1mCREATE TABLE "guests" ("id" serial primary key, "first" character varying(255), "last" character varying(255), "invited_adults" integer, "likelihood" integer, "guest_category_id" integer, "rsvp_adults" integer, "rsvp_children" integer, "address" character varying(255), "city" character varying(255), "state" character varying(255), "zip" character varying(255), "relationship" character varying(255), "comments" character varying(255), "created_at" timestamp, "updated_at" timestamp, "guest_first" character varying(255), "ext_id" character varying(255), "invited_children" integer, "guest_last" character varying(255)) [0m
+  [1m[35m (0.6ms)[0m  CREATE INDEX "index_guests_on_guest_category_id" ON "guests" USING btree ("guest_category_id")
+  [1m[36m (2.2ms)[0m  [1mCREATE TABLE "posts" ("id" serial primary key, "name" character varying(255), "email" character varying(255), "message" text, "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35m (2.0ms)[0m  CREATE TABLE "rsvps" ("id" serial primary key, "invited_guest_name" character varying(255), "plus_one" boolean, "plus_one_name" character varying(255), "meal" character varying(255), "created_at" timestamp, "updated_at" timestamp) 
+  [1m[36m (0.6ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" character varying(255) NOT NULL) [0m
+  [1m[35m (0.8ms)[0m  CREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")
+  [1m[36m (0.2ms)[0m  [1mSELECT version FROM "schema_migrations"[0m
+  [1m[35m (0.4ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20140602020838')
+  [1m[36m (0.3ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20140223194125')[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.1ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.6ms)[0m  ALTER TABLE "guest_categories" DISABLE TRIGGER ALL;ALTER TABLE "guests" DISABLE TRIGGER ALL;ALTER TABLE "posts" DISABLE TRIGGER ALL;ALTER TABLE "rsvps" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mFixture Delete (0.2ms)[0m  DELETE FROM "posts"
+  [1m[36mFixture Insert (0.3ms)[0m  [1mINSERT INTO "posts" ("name", "email", "message", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyText', '2014-06-02 03:33:41', '2014-06-02 03:33:41', 980190962)[0m
+  [1m[35mFixture Insert (0.1ms)[0m  INSERT INTO "posts" ("name", "email", "message", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyText', '2014-06-02 03:33:41', '2014-06-02 03:33:41', 298486374)
+  [1m[36mFixture Delete (0.2ms)[0m  [1mDELETE FROM "rsvps"[0m
+  [1m[35mFixture Insert (0.2ms)[0m  INSERT INTO "rsvps" ("invited_guest_name", "plus_one", "plus_one_name", "meal", "created_at", "updated_at", "id") VALUES ('Guest1', 'f', NULL, 'beef', '2014-06-02 03:33:41', '2014-06-02 03:33:41', 980190962)
+  [1m[36mFixture Insert (0.1ms)[0m  [1mINSERT INTO "rsvps" ("invited_guest_name", "plus_one", "plus_one_name", "meal", "created_at", "updated_at", "id") VALUES ('Guest1', 't', 'Guest_1_Guest', 'chicken', '2014-06-02 03:33:41', '2014-06-02 03:33:41', 298486374)[0m
+  [1m[35m (0.2ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mALTER TABLE "guest_categories" ENABLE TRIGGER ALL;ALTER TABLE "guests" ENABLE TRIGGER ALL;ALTER TABLE "posts" ENABLE TRIGGER ALL;ALTER TABLE "rsvps" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL[0m
+  [1m[35m (0.0ms)[0m  BEGIN
+---------------------------------------------------
+RsvpTest: test_spreadsheet_rows_get_created_on_save
+---------------------------------------------------
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (1.1ms)[0m  INSERT INTO "rsvps" ("created_at", "invited_guest_name", "meal", "plus_one", "plus_one_name", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["created_at", Mon, 02 Jun 2014 03:33:42 UTC +00:00], ["invited_guest_name", "Automated Test"], ["meal", "bits"], ["plus_one", true], ["plus_one_name", "Automated Test Guest"], ["updated_at", Mon, 02 Jun 2014 03:33:42 UTC +00:00]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  ROLLBACK
+  [1m[36m (110.4ms)[0m  [1mDROP DATABASE IF EXISTS "wedding_test"[0m
+  [1m[35m (228.3ms)[0m  CREATE DATABASE "wedding_test" ENCODING = 'unicode'
+  [1m[36mSQL (22.8ms)[0m  [1mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35m (4.2ms)[0m  CREATE TABLE "posts" ("id" serial primary key, "name" character varying(255), "email" character varying(255), "message" text, "created_at" timestamp, "updated_at" timestamp) 
+  [1m[36m (2.2ms)[0m  [1mCREATE TABLE "rsvps" ("id" serial primary key, "invited_guest_name" character varying(255), "plus_one" boolean, "plus_one_name" character varying(255), "num_beef" integer, "num_chicken" integer, "num_veg" integer, "declined" boolean, "meal" character varying(255), "notes" text, "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35m (0.7ms)[0m  CREATE TABLE "schema_migrations" ("version" character varying(255) NOT NULL) 
+  [1m[36m (0.8ms)[0m  [1mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [1m[35m (0.2ms)[0m  SELECT version FROM "schema_migrations"
+  [1m[36m (0.3ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20140602020838')[0m
+  [1m[35m (0.2ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20140223194125')
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.1ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36m (112.9ms)[0m  [1mDROP DATABASE IF EXISTS "wedding_test"[0m
+  [1m[35m (235.7ms)[0m  CREATE DATABASE "wedding_test" ENCODING = 'unicode'
+  [1m[36mSQL (24.6ms)[0m  [1mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35m (3.6ms)[0m  CREATE TABLE "posts" ("id" serial primary key, "name" character varying(255), "email" character varying(255), "message" text, "created_at" timestamp, "updated_at" timestamp) 
+  [1m[36m (2.3ms)[0m  [1mCREATE TABLE "rsvps" ("id" serial primary key, "invited_guest_name" character varying(255), "plus_one" boolean, "plus_one_name" character varying(255), "num_beef" integer, "num_chicken" integer, "num_veg" integer, "declined" boolean, "meal" character varying(255), "notes" text, "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35m (0.5ms)[0m  CREATE TABLE "schema_migrations" ("version" character varying(255) NOT NULL) 
+  [1m[36m (0.8ms)[0m  [1mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [1m[35m (0.2ms)[0m  SELECT version FROM "schema_migrations"
+  [1m[36m (0.4ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20140602020838')[0m
+  [1m[35m (0.3ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20140223194125')
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.1ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36m (3.1ms)[0m  [1mALTER TABLE "posts" DISABLE TRIGGER ALL;ALTER TABLE "rsvps" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mFixture Delete (0.7ms)[0m  [1mDELETE FROM "posts"[0m
+  [1m[35mFixture Insert (0.3ms)[0m  INSERT INTO "posts" ("name", "email", "message", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyText', '2014-07-09 03:41:15', '2014-07-09 03:41:15', 980190962)
+  [1m[36mFixture Insert (0.1ms)[0m  [1mINSERT INTO "posts" ("name", "email", "message", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyText', '2014-07-09 03:41:15', '2014-07-09 03:41:15', 298486374)[0m
+  [1m[35mFixture Delete (0.2ms)[0m  DELETE FROM "rsvps"
+  [1m[36mFixture Insert (0.2ms)[0m  [1mINSERT INTO "rsvps" ("invited_guest_name", "plus_one", "plus_one_name", "meal", "created_at", "updated_at", "id") VALUES ('Guest1', 'f', NULL, 'beef', '2014-07-09 03:41:15', '2014-07-09 03:41:15', 980190962)[0m
+  [1m[35mFixture Insert (0.1ms)[0m  INSERT INTO "rsvps" ("invited_guest_name", "plus_one", "plus_one_name", "meal", "created_at", "updated_at", "id") VALUES ('Guest1', 't', 'Guest_1_Guest', 'chicken', '2014-07-09 03:41:15', '2014-07-09 03:41:15', 298486374)
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  ALTER TABLE "posts" ENABLE TRIGGER ALL;ALTER TABLE "rsvps" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+---------------------------------------------------
+RsvpTest: test_spreadsheet_rows_get_created_on_save
+---------------------------------------------------
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (1.2ms)[0m  [1mINSERT INTO "rsvps" ("created_at", "declined", "invited_guest_name", "meal", "num_beef", "num_chicken", "num_veg", "plus_one", "plus_one_name", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"[0m  [["created_at", Wed, 09 Jul 2014 03:41:17 UTC +00:00], ["declined", false], ["invited_guest_name", "Automated Test"], ["meal", "v v"], ["num_beef", 0], ["num_chicken", 0], ["num_veg", 2], ["plus_one", true], ["plus_one_name", "Automated Test Guest"], ["updated_at", Wed, 09 Jul 2014 03:41:17 UTC +00:00]]
+  [1m[35m (0.2ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.2ms)[0m  [1mROLLBACK[0m
+  [1m[36m (114.8ms)[0m  [1mDROP DATABASE IF EXISTS "wedding_test"[0m
+  [1m[35m (231.0ms)[0m  CREATE DATABASE "wedding_test" ENCODING = 'unicode'
+  [1m[36mSQL (23.4ms)[0m  [1mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35m (3.4ms)[0m  CREATE TABLE "posts" ("id" serial primary key, "name" character varying(255), "email" character varying(255), "message" text, "created_at" timestamp, "updated_at" timestamp) 
+  [1m[36m (3.8ms)[0m  [1mCREATE TABLE "rsvps" ("id" serial primary key, "invited_guest_name" character varying(255), "plus_one" boolean, "plus_one_name" character varying(255), "num_beef" integer, "num_chicken" integer, "num_veg" integer, "declined" boolean, "meal" character varying(255), "notes" text, "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35m (0.7ms)[0m  CREATE TABLE "schema_migrations" ("version" character varying(255) NOT NULL) 
+  [1m[36m (0.9ms)[0m  [1mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [1m[35m (0.2ms)[0m  SELECT version FROM "schema_migrations"
+  [1m[36m (0.4ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20140602020838')[0m
+  [1m[35m (0.4ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20140223194125')
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36m (108.9ms)[0m  [1mDROP DATABASE IF EXISTS "wedding_test"[0m
+  [1m[35m (227.9ms)[0m  CREATE DATABASE "wedding_test" ENCODING = 'unicode'
+  [1m[36mSQL (27.0ms)[0m  [1mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35m (3.9ms)[0m  CREATE TABLE "posts" ("id" serial primary key, "name" character varying(255), "email" character varying(255), "message" text, "created_at" timestamp, "updated_at" timestamp) 
+  [1m[36m (2.2ms)[0m  [1mCREATE TABLE "rsvps" ("id" serial primary key, "invited_guest_name" character varying(255), "plus_one" boolean, "plus_one_name" character varying(255), "num_beef" integer, "num_chicken" integer, "num_veg" integer, "declined" boolean, "meal" character varying(255), "notes" text, "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35m (0.5ms)[0m  CREATE TABLE "schema_migrations" ("version" character varying(255) NOT NULL) 
+  [1m[36m (0.6ms)[0m  [1mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [1m[35m (0.2ms)[0m  SELECT version FROM "schema_migrations"
+  [1m[36m (0.3ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20140602020838')[0m
+  [1m[35m (0.3ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20140223194125')
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.3ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36m (0.4ms)[0m  [1mALTER TABLE "posts" DISABLE TRIGGER ALL;ALTER TABLE "rsvps" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mFixture Delete (0.2ms)[0m  [1mDELETE FROM "posts"[0m
+  [1m[35mFixture Insert (0.3ms)[0m  INSERT INTO "posts" ("name", "email", "message", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyText', '2014-07-09 03:49:36', '2014-07-09 03:49:36', 980190962)
+  [1m[36mFixture Insert (0.1ms)[0m  [1mINSERT INTO "posts" ("name", "email", "message", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyText', '2014-07-09 03:49:36', '2014-07-09 03:49:36', 298486374)[0m
+  [1m[35mFixture Delete (0.2ms)[0m  DELETE FROM "rsvps"
+  [1m[36mFixture Insert (0.2ms)[0m  [1mINSERT INTO "rsvps" ("invited_guest_name", "plus_one", "plus_one_name", "meal", "created_at", "updated_at", "id") VALUES ('Guest1', 'f', NULL, 'beef', '2014-07-09 03:49:36', '2014-07-09 03:49:36', 980190962)[0m
+  [1m[35mFixture Insert (0.2ms)[0m  INSERT INTO "rsvps" ("invited_guest_name", "plus_one", "plus_one_name", "meal", "created_at", "updated_at", "id") VALUES ('Guest1', 't', 'Guest_1_Guest', 'chicken', '2014-07-09 03:49:36', '2014-07-09 03:49:36', 298486374)
+  [1m[36m (0.2ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  ALTER TABLE "posts" ENABLE TRIGGER ALL;ALTER TABLE "rsvps" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL
+  [1m[36m (0.0ms)[0m  [1mBEGIN[0m
+------------------------------------------
+RsvpTest: test_meals_get_created_correctly
+------------------------------------------
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (1.3ms)[0m  [1mINSERT INTO "rsvps" ("created_at", "declined", "invited_guest_name", "meal", "notes", "num_beef", "num_chicken", "num_veg", "plus_one", "plus_one_name", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING "id"[0m  [["created_at", Wed, 09 Jul 2014 03:49:36 UTC +00:00], ["declined", false], ["invited_guest_name", "Automated Test"], ["meal", "b c c v v v"], ["notes", "Test Notes."], ["num_beef", 1], ["num_chicken", 2], ["num_veg", 3], ["plus_one", true], ["plus_one_name", "Automated Test Guest"], ["updated_at", Wed, 09 Jul 2014 03:49:36 UTC +00:00]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.2ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+---------------------------------------------------
+RsvpTest: test_spreadsheet_rows_get_created_on_save
+---------------------------------------------------
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.5ms)[0m  INSERT INTO "rsvps" ("created_at", "declined", "invited_guest_name", "meal", "num_beef", "num_chicken", "num_veg", "plus_one", "plus_one_name", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"  [["created_at", Wed, 09 Jul 2014 03:49:39 UTC +00:00], ["declined", false], ["invited_guest_name", "Automated Test"], ["meal", "v v"], ["num_beef", 0], ["num_chicken", 0], ["num_veg", 2], ["plus_one", true], ["plus_one_name", "Automated Test Guest"], ["updated_at", Wed, 09 Jul 2014 03:49:39 UTC +00:00]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  ROLLBACK
+  [1m[36m (109.1ms)[0m  [1mDROP DATABASE IF EXISTS "wedding_test"[0m
+  [1m[35m (229.3ms)[0m  CREATE DATABASE "wedding_test" ENCODING = 'unicode'
+  [1m[36mSQL (27.3ms)[0m  [1mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35m (3.8ms)[0m  CREATE TABLE "posts" ("id" serial primary key, "name" character varying(255), "email" character varying(255), "message" text, "created_at" timestamp, "updated_at" timestamp) 
+  [1m[36m (2.3ms)[0m  [1mCREATE TABLE "rsvps" ("id" serial primary key, "invited_guest_name" character varying(255), "plus_one" boolean, "plus_one_name" character varying(255), "num_beef" integer, "num_chicken" integer, "num_veg" integer, "declined" boolean, "meal" character varying(255), "notes" text, "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35m (0.5ms)[0m  CREATE TABLE "schema_migrations" ("version" character varying(255) NOT NULL) 
+  [1m[36m (1.0ms)[0m  [1mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [1m[35m (0.2ms)[0m  SELECT version FROM "schema_migrations"
+  [1m[36m (0.4ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20140602020838')[0m
+  [1m[35m (0.3ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20140223194125')
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.1ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36m (0.4ms)[0m  [1mALTER TABLE "posts" DISABLE TRIGGER ALL;ALTER TABLE "rsvps" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mFixture Delete (0.2ms)[0m  [1mDELETE FROM "posts"[0m
+  [1m[35mFixture Insert (0.3ms)[0m  INSERT INTO "posts" ("name", "email", "message", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyText', '2014-07-09 03:54:07', '2014-07-09 03:54:07', 980190962)
+  [1m[36mFixture Insert (0.1ms)[0m  [1mINSERT INTO "posts" ("name", "email", "message", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyText', '2014-07-09 03:54:07', '2014-07-09 03:54:07', 298486374)[0m
+  [1m[35mFixture Delete (0.2ms)[0m  DELETE FROM "rsvps"
+  [1m[36mFixture Insert (0.2ms)[0m  [1mINSERT INTO "rsvps" ("invited_guest_name", "plus_one", "plus_one_name", "meal", "created_at", "updated_at", "id") VALUES ('Guest1', 'f', NULL, 'beef', '2014-07-09 03:54:07', '2014-07-09 03:54:07', 980190962)[0m
+  [1m[35mFixture Insert (0.1ms)[0m  INSERT INTO "rsvps" ("invited_guest_name", "plus_one", "plus_one_name", "meal", "created_at", "updated_at", "id") VALUES ('Guest1', 't', 'Guest_1_Guest', 'chicken', '2014-07-09 03:54:07', '2014-07-09 03:54:07', 298486374)
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  ALTER TABLE "posts" ENABLE TRIGGER ALL;ALTER TABLE "rsvps" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+------------------------------------------
+RsvpTest: test_meals_get_created_correctly
+------------------------------------------
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (1.1ms)[0m  [1mINSERT INTO "rsvps" ("created_at", "declined", "invited_guest_name", "meal", "notes", "num_beef", "num_chicken", "num_veg", "plus_one", "plus_one_name", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING "id"[0m  [["created_at", Wed, 09 Jul 2014 03:54:07 UTC +00:00], ["declined", false], ["invited_guest_name", "Automated Test"], ["meal", "b c c v v v"], ["notes", "Test Notes."], ["num_beef", 1], ["num_chicken", 2], ["num_veg", 3], ["plus_one", true], ["plus_one_name", "Automated Test Guest"], ["updated_at", Wed, 09 Jul 2014 03:54:07 UTC +00:00]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.2ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+---------------------------------------------------
+RsvpTest: test_spreadsheet_rows_get_created_on_save
+---------------------------------------------------
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.5ms)[0m  INSERT INTO "rsvps" ("created_at", "declined", "invited_guest_name", "meal", "num_beef", "num_chicken", "num_veg", "plus_one", "plus_one_name", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"  [["created_at", Wed, 09 Jul 2014 03:54:13 UTC +00:00], ["declined", false], ["invited_guest_name", "Automated Test"], ["meal", "v v"], ["num_beef", 0], ["num_chicken", 0], ["num_veg", 2], ["plus_one", true], ["plus_one_name", "Automated Test Guest"], ["updated_at", Wed, 09 Jul 2014 03:54:13 UTC +00:00]]
+  [1m[36m (0.2ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  ROLLBACK
+  [1m[36m (112.8ms)[0m  [1mDROP DATABASE IF EXISTS "wedding_test"[0m
+  [1m[35m (228.0ms)[0m  CREATE DATABASE "wedding_test" ENCODING = 'unicode'
+  [1m[36mSQL (24.3ms)[0m  [1mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35m (3.9ms)[0m  CREATE TABLE "posts" ("id" serial primary key, "name" character varying(255), "email" character varying(255), "message" text, "created_at" timestamp, "updated_at" timestamp) 
+  [1m[36m (2.7ms)[0m  [1mCREATE TABLE "rsvps" ("id" serial primary key, "invited_guest_name" character varying(255), "plus_one" boolean, "plus_one_name" character varying(255), "num_beef" integer, "num_chicken" integer, "num_veg" integer, "declined" boolean, "meal" character varying(255), "notes" text, "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35m (0.7ms)[0m  CREATE TABLE "schema_migrations" ("version" character varying(255) NOT NULL) 
+  [1m[36m (0.9ms)[0m  [1mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [1m[35m (0.2ms)[0m  SELECT version FROM "schema_migrations"
+  [1m[36m (0.4ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20140602020838')[0m
+  [1m[35m (0.4ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20140223194125')
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.2ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36m (0.5ms)[0m  [1mALTER TABLE "posts" DISABLE TRIGGER ALL;ALTER TABLE "rsvps" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mFixture Delete (0.2ms)[0m  [1mDELETE FROM "posts"[0m
+  [1m[35mFixture Insert (0.4ms)[0m  INSERT INTO "posts" ("name", "email", "message", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyText', '2014-07-09 03:54:43', '2014-07-09 03:54:43', 980190962)
+  [1m[36mFixture Insert (0.1ms)[0m  [1mINSERT INTO "posts" ("name", "email", "message", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyText', '2014-07-09 03:54:43', '2014-07-09 03:54:43', 298486374)[0m
+  [1m[35mFixture Delete (0.2ms)[0m  DELETE FROM "rsvps"
+  [1m[36mFixture Insert (0.2ms)[0m  [1mINSERT INTO "rsvps" ("invited_guest_name", "plus_one", "plus_one_name", "meal", "created_at", "updated_at", "id") VALUES ('Guest1', 'f', NULL, 'beef', '2014-07-09 03:54:43', '2014-07-09 03:54:43', 980190962)[0m
+  [1m[35mFixture Insert (0.1ms)[0m  INSERT INTO "rsvps" ("invited_guest_name", "plus_one", "plus_one_name", "meal", "created_at", "updated_at", "id") VALUES ('Guest1', 't', 'Guest_1_Guest', 'chicken', '2014-07-09 03:54:43', '2014-07-09 03:54:43', 298486374)
+  [1m[36m (0.2ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  ALTER TABLE "posts" ENABLE TRIGGER ALL;ALTER TABLE "rsvps" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL
+  [1m[36m (0.0ms)[0m  [1mBEGIN[0m
+------------------------------------------
+RsvpTest: test_meals_get_created_correctly
+------------------------------------------
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (1.0ms)[0m  [1mINSERT INTO "rsvps" ("created_at", "declined", "invited_guest_name", "meal", "notes", "num_beef", "num_chicken", "num_veg", "plus_one", "plus_one_name", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING "id"[0m  [["created_at", Wed, 09 Jul 2014 03:54:43 UTC +00:00], ["declined", false], ["invited_guest_name", "Automated Test"], ["meal", "b c c v v v"], ["notes", "Test Notes."], ["num_beef", 1], ["num_chicken", 2], ["num_veg", 3], ["plus_one", true], ["plus_one_name", "Automated Test Guest"], ["updated_at", Wed, 09 Jul 2014 03:54:43 UTC +00:00]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.2ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+---------------------------------------------------
+RsvpTest: test_spreadsheet_rows_get_created_on_save
+---------------------------------------------------
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.5ms)[0m  INSERT INTO "rsvps" ("created_at", "declined", "invited_guest_name", "meal", "num_beef", "num_chicken", "num_veg", "plus_one", "plus_one_name", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"  [["created_at", Wed, 09 Jul 2014 03:54:49 UTC +00:00], ["declined", false], ["invited_guest_name", "Automated Test"], ["meal", "v v"], ["num_beef", 0], ["num_chicken", 0], ["num_veg", 2], ["plus_one", true], ["plus_one_name", "Automated Test Guest"], ["updated_at", Wed, 09 Jul 2014 03:54:49 UTC +00:00]]
+  [1m[36m (0.2ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  ROLLBACK
+  [1m[36m (110.1ms)[0m  [1mDROP DATABASE IF EXISTS "wedding_test"[0m
+  [1m[35m (294.7ms)[0m  CREATE DATABASE "wedding_test" ENCODING = 'unicode'
+  [1m[36mSQL (26.6ms)[0m  [1mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35m (4.4ms)[0m  CREATE TABLE "posts" ("id" serial primary key, "name" character varying(255), "email" character varying(255), "message" text, "created_at" timestamp, "updated_at" timestamp) 
+  [1m[36m (2.9ms)[0m  [1mCREATE TABLE "rsvps" ("id" serial primary key, "invited_guest_name" character varying(255), "plus_one" boolean, "plus_one_name" character varying(255), "num_beef" integer, "num_chicken" integer, "num_veg" integer, "declined" boolean, "meal" character varying(255), "notes" text, "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35m (0.6ms)[0m  CREATE TABLE "schema_migrations" ("version" character varying(255) NOT NULL) 
+  [1m[36m (0.8ms)[0m  [1mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [1m[35m (0.2ms)[0m  SELECT version FROM "schema_migrations"
+  [1m[36m (0.4ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20140602020838')[0m
+  [1m[35m (0.4ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20140223194125')
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.1ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36m (0.4ms)[0m  [1mALTER TABLE "posts" DISABLE TRIGGER ALL;ALTER TABLE "rsvps" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mFixture Delete (0.2ms)[0m  [1mDELETE FROM "posts"[0m
+  [1m[35mFixture Insert (0.4ms)[0m  INSERT INTO "posts" ("name", "email", "message", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyText', '2014-07-09 04:04:18', '2014-07-09 04:04:18', 980190962)
+  [1m[36mFixture Insert (0.2ms)[0m  [1mINSERT INTO "posts" ("name", "email", "message", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyText', '2014-07-09 04:04:18', '2014-07-09 04:04:18', 298486374)[0m
+  [1m[35mFixture Delete (0.2ms)[0m  DELETE FROM "rsvps"
+  [1m[36mFixture Insert (0.2ms)[0m  [1mINSERT INTO "rsvps" ("invited_guest_name", "plus_one", "plus_one_name", "meal", "created_at", "updated_at", "id") VALUES ('Guest1', 'f', NULL, 'beef', '2014-07-09 04:04:18', '2014-07-09 04:04:18', 980190962)[0m
+  [1m[35mFixture Insert (0.1ms)[0m  INSERT INTO "rsvps" ("invited_guest_name", "plus_one", "plus_one_name", "meal", "created_at", "updated_at", "id") VALUES ('Guest1', 't', 'Guest_1_Guest', 'chicken', '2014-07-09 04:04:18', '2014-07-09 04:04:18', 298486374)
+  [1m[36m (0.2ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  ALTER TABLE "posts" ENABLE TRIGGER ALL;ALTER TABLE "rsvps" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+------------------------------------------
+RsvpTest: test_meals_get_created_correctly
+------------------------------------------
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.4ms)[0m  [1mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+---------------------------------------------------
+RsvpTest: test_spreadsheet_rows_get_created_on_save
+---------------------------------------------------
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (109.2ms)[0m  [1mDROP DATABASE IF EXISTS "wedding_test"[0m
+  [1m[35m (230.6ms)[0m  CREATE DATABASE "wedding_test" ENCODING = 'unicode'
+  [1m[36mSQL (25.9ms)[0m  [1mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35m (3.8ms)[0m  CREATE TABLE "posts" ("id" serial primary key, "name" character varying(255), "email" character varying(255), "message" text, "created_at" timestamp, "updated_at" timestamp) 
+  [1m[36m (2.3ms)[0m  [1mCREATE TABLE "rsvps" ("id" serial primary key, "invited_guest_name" character varying(255), "plus_one" boolean, "plus_one_name" character varying(255), "num_beef" integer, "num_chicken" integer, "num_veg" integer, "declined" boolean, "meal" character varying(255), "notes" text, "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35m (0.6ms)[0m  CREATE TABLE "schema_migrations" ("version" character varying(255) NOT NULL) 
+  [1m[36m (0.8ms)[0m  [1mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [1m[35m (0.2ms)[0m  SELECT version FROM "schema_migrations"
+  [1m[36m (0.4ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20140602020838')[0m
+  [1m[35m (0.3ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20140223194125')
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.1ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36m (0.4ms)[0m  [1mALTER TABLE "posts" DISABLE TRIGGER ALL;ALTER TABLE "rsvps" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mFixture Delete (0.4ms)[0m  [1mDELETE FROM "posts"[0m
+  [1m[35mFixture Insert (0.4ms)[0m  INSERT INTO "posts" ("name", "email", "message", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyText', '2014-07-09 04:04:56', '2014-07-09 04:04:56', 980190962)
+  [1m[36mFixture Insert (0.1ms)[0m  [1mINSERT INTO "posts" ("name", "email", "message", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyText', '2014-07-09 04:04:56', '2014-07-09 04:04:56', 298486374)[0m
+  [1m[35mFixture Delete (0.2ms)[0m  DELETE FROM "rsvps"
+  [1m[36mFixture Insert (0.2ms)[0m  [1mINSERT INTO "rsvps" ("invited_guest_name", "plus_one", "plus_one_name", "meal", "created_at", "updated_at", "id") VALUES ('Guest1', 'f', NULL, 'beef', '2014-07-09 04:04:56', '2014-07-09 04:04:56', 980190962)[0m
+  [1m[35mFixture Insert (0.1ms)[0m  INSERT INTO "rsvps" ("invited_guest_name", "plus_one", "plus_one_name", "meal", "created_at", "updated_at", "id") VALUES ('Guest1', 't', 'Guest_1_Guest', 'chicken', '2014-07-09 04:04:56', '2014-07-09 04:04:56', 298486374)
+  [1m[36m (0.2ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  ALTER TABLE "posts" ENABLE TRIGGER ALL;ALTER TABLE "rsvps" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL
+  [1m[36m (0.0ms)[0m  [1mBEGIN[0m
+------------------------------------------
+RsvpTest: test_meals_get_created_correctly
+------------------------------------------
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (2.0ms)[0m  [1mINSERT INTO "rsvps" ("created_at", "declined", "invited_guest_name", "meal", "notes", "num_beef", "num_chicken", "num_veg", "plus_one", "plus_one_name", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING "id"[0m  [["created_at", Wed, 09 Jul 2014 04:04:56 UTC +00:00], ["declined", false], ["invited_guest_name", "Automated Test"], ["meal", "b c c v v v"], ["notes", "Test Notes."], ["num_beef", 1], ["num_chicken", 2], ["num_veg", 3], ["plus_one", true], ["plus_one_name", "Automated Test Guest"], ["updated_at", Wed, 09 Jul 2014 04:04:56 UTC +00:00]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.2ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+---------------------------------------------------
+RsvpTest: test_spreadsheet_rows_get_created_on_save
+---------------------------------------------------
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.5ms)[0m  INSERT INTO "rsvps" ("created_at", "declined", "invited_guest_name", "meal", "num_beef", "num_chicken", "num_veg", "plus_one", "plus_one_name", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"  [["created_at", Wed, 09 Jul 2014 04:05:02 UTC +00:00], ["declined", false], ["invited_guest_name", "Automated Test"], ["meal", "v v"], ["num_beef", 0], ["num_chicken", 0], ["num_veg", 2], ["plus_one", true], ["plus_one_name", "Automated Test Guest"], ["updated_at", Wed, 09 Jul 2014 04:05:02 UTC +00:00]]
+  [1m[36m (0.2ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  ROLLBACK
+  [1m[36m (110.8ms)[0m  [1mDROP DATABASE IF EXISTS "wedding_test"[0m
+  [1m[35m (231.2ms)[0m  CREATE DATABASE "wedding_test" ENCODING = 'unicode'
+  [1m[36mSQL (25.3ms)[0m  [1mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35m (3.5ms)[0m  CREATE TABLE "posts" ("id" serial primary key, "name" character varying(255), "email" character varying(255), "message" text, "created_at" timestamp, "updated_at" timestamp) 
+  [1m[36m (2.2ms)[0m  [1mCREATE TABLE "rsvps" ("id" serial primary key, "invited_guest_name" character varying(255), "plus_one" boolean, "plus_one_name" character varying(255), "num_beef" integer, "num_chicken" integer, "num_veg" integer, "declined" boolean, "meal" character varying(255), "notes" text, "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35m (0.5ms)[0m  CREATE TABLE "schema_migrations" ("version" character varying(255) NOT NULL) 
+  [1m[36m (0.6ms)[0m  [1mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [1m[35m (0.2ms)[0m  SELECT version FROM "schema_migrations"
+  [1m[36m (0.3ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20140602020838')[0m
+  [1m[35m (0.2ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20140223194125')
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.1ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36m (0.5ms)[0m  [1mALTER TABLE "posts" DISABLE TRIGGER ALL;ALTER TABLE "rsvps" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mFixture Delete (0.2ms)[0m  [1mDELETE FROM "posts"[0m
+  [1m[35mFixture Insert (0.3ms)[0m  INSERT INTO "posts" ("name", "email", "message", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyText', '2014-07-09 04:05:29', '2014-07-09 04:05:29', 980190962)
+  [1m[36mFixture Insert (0.2ms)[0m  [1mINSERT INTO "posts" ("name", "email", "message", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyText', '2014-07-09 04:05:29', '2014-07-09 04:05:29', 298486374)[0m
+  [1m[35mFixture Delete (0.2ms)[0m  DELETE FROM "rsvps"
+  [1m[36mFixture Insert (0.2ms)[0m  [1mINSERT INTO "rsvps" ("invited_guest_name", "plus_one", "plus_one_name", "meal", "created_at", "updated_at", "id") VALUES ('Guest1', 'f', NULL, 'beef', '2014-07-09 04:05:29', '2014-07-09 04:05:29', 980190962)[0m
+  [1m[35mFixture Insert (0.1ms)[0m  INSERT INTO "rsvps" ("invited_guest_name", "plus_one", "plus_one_name", "meal", "created_at", "updated_at", "id") VALUES ('Guest1', 't', 'Guest_1_Guest', 'chicken', '2014-07-09 04:05:29', '2014-07-09 04:05:29', 298486374)
+  [1m[36m (0.2ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  ALTER TABLE "posts" ENABLE TRIGGER ALL;ALTER TABLE "rsvps" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+------------------------------------------
+RsvpTest: test_meals_get_created_correctly
+------------------------------------------
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (1.3ms)[0m  [1mINSERT INTO "rsvps" ("created_at", "declined", "invited_guest_name", "meal", "notes", "num_beef", "num_chicken", "num_veg", "plus_one", "plus_one_name", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING "id"[0m  [["created_at", Wed, 09 Jul 2014 04:05:29 UTC +00:00], ["declined", false], ["invited_guest_name", "Automated Test"], ["meal", "b c c v v v"], ["notes", "Test Notes."], ["num_beef", 1], ["num_chicken", 2], ["num_veg", 3], ["plus_one", true], ["plus_one_name", "Automated Test Guest"], ["updated_at", Wed, 09 Jul 2014 04:05:29 UTC +00:00]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.2ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+---------------------------------------------------
+RsvpTest: test_spreadsheet_rows_get_created_on_save
+---------------------------------------------------
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.5ms)[0m  INSERT INTO "rsvps" ("created_at", "declined", "invited_guest_name", "meal", "num_beef", "num_chicken", "num_veg", "plus_one", "plus_one_name", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"  [["created_at", Wed, 09 Jul 2014 04:05:34 UTC +00:00], ["declined", false], ["invited_guest_name", "Automated Test"], ["meal", "v v"], ["num_beef", 0], ["num_chicken", 0], ["num_veg", 2], ["plus_one", true], ["plus_one_name", "Automated Test Guest"], ["updated_at", Wed, 09 Jul 2014 04:05:34 UTC +00:00]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  ROLLBACK
+  [1m[36m (107.7ms)[0m  [1mDROP DATABASE IF EXISTS "wedding_test"[0m
+  [1m[35m (230.3ms)[0m  CREATE DATABASE "wedding_test" ENCODING = 'unicode'
+  [1m[36m (110.3ms)[0m  [1mDROP DATABASE IF EXISTS "wedding_test"[0m
+  [1m[35m (229.8ms)[0m  CREATE DATABASE "wedding_test" ENCODING = 'unicode'
+  [1m[36m (111.4ms)[0m  [1mDROP DATABASE IF EXISTS "wedding_test"[0m
+  [1m[35m (228.9ms)[0m  CREATE DATABASE "wedding_test" ENCODING = 'unicode'
+  [1m[36mSQL (0.8ms)[0m  [1mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35m (4.2ms)[0m  CREATE TABLE "posts" ("id" serial primary key, "name" character varying(255), "email" character varying(255), "message" text, "created_at" timestamp, "updated_at" timestamp) 
+  [1m[36m (2.6ms)[0m  [1mCREATE TABLE "rsvps" ("id" serial primary key, "invited_guest_name" character varying(255), "plus_one" boolean, "plus_one_name" character varying(255), "num_beef" integer, "num_chicken" integer, "num_veg" integer, "declined" boolean, "meal" character varying(255), "notes" text, "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35m (0.6ms)[0m  CREATE TABLE "schema_migrations" ("version" character varying(255) NOT NULL) 
+  [1m[36m (0.9ms)[0m  [1mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [1m[35m (0.2ms)[0m  SELECT version FROM "schema_migrations"
+  [1m[36m (0.4ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20140602020838')[0m
+  [1m[35m (0.4ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20140223194125')
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.1ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36m (0.4ms)[0m  [1mALTER TABLE "posts" DISABLE TRIGGER ALL;ALTER TABLE "rsvps" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mFixture Delete (0.2ms)[0m  [1mDELETE FROM "posts"[0m
+  [1m[35mFixture Insert (0.3ms)[0m  INSERT INTO "posts" ("name", "email", "message", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyText', '2014-07-09 05:15:11', '2014-07-09 05:15:11', 980190962)
+  [1m[36mFixture Insert (0.2ms)[0m  [1mINSERT INTO "posts" ("name", "email", "message", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyText', '2014-07-09 05:15:11', '2014-07-09 05:15:11', 298486374)[0m
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mALTER TABLE "posts" ENABLE TRIGGER ALL;ALTER TABLE "rsvps" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+--------------------------------------------
+PostsControllerTest: test_should_create_post
+--------------------------------------------
+  [1m[36mPost Load (0.6ms)[0m  [1mSELECT "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT 1[0m  [["id", 980190962]]
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "posts"
+Processing by PostsController#create as HTML
+  Parameters: {"post"=>{"email"=>"MyString", "message"=>"MyText", "name"=>"MyString"}}
+Redirected to http://en.wikipedia.org/wiki/User:Mike_Rosoft/Spambot
+Completed 302 Found in 1ms (ActiveRecord: 0.0ms)
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "posts"[0m
+  [1m[35m (0.2ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+---------------------------------------------
+PostsControllerTest: test_should_destroy_post
+---------------------------------------------
+  [1m[35mPost Load (0.4ms)[0m  SELECT "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT 1  [["id", 980190962]]
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "posts"[0m
+Processing by PostsController#destroy as HTML
+  Parameters: {"id"=>"980190962"}
+  [1m[35mPost Load (0.2ms)[0m  SELECT "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT 1  [["id", "980190962"]]
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.3ms)[0m  DELETE FROM "posts" WHERE "posts"."id" = $1  [["id", 980190962]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://test.host/posts
+Completed 302 Found in 3ms (ActiveRecord: 0.6ms)
+  [1m[35m (0.3ms)[0m  SELECT COUNT(*) FROM "posts"
+  [1m[36m (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+-----------------------------------------
+PostsControllerTest: test_should_get_edit
+-----------------------------------------
+  [1m[36mPost Load (0.2ms)[0m  [1mSELECT "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT 1[0m  [["id", 980190962]]
+Processing by PostsController#edit as HTML
+  Parameters: {"id"=>"980190962"}
+  [1m[35mPost Load (0.2ms)[0m  SELECT "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT 1  [["id", "980190962"]]
+  Rendered posts/_form.html.erb (8.9ms)
+  Rendered layouts/_navigation_links.html.erb (0.8ms)
+  Rendered layouts/_navigation.html.erb (1.6ms)
+  Rendered layouts/_messages.html.erb (0.3ms)
+  Rendered layouts/_footer.html.erb (0.2ms)
+Completed 200 OK in 2330ms (Views: 2328.7ms | ActiveRecord: 0.2ms)
+  [1m[36m (0.2ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+------------------------------------------
+PostsControllerTest: test_should_get_index
+------------------------------------------
+  [1m[36mPost Load (0.2ms)[0m  [1mSELECT "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT 1[0m  [["id", 980190962]]
+Processing by PostsController#index as HTML
+  [1m[35mPost Load (0.1ms)[0m  SELECT "posts".* FROM "posts"
+  Rendered layouts/_navigation_links.html.erb (0.4ms)
+  Rendered layouts/_navigation.html.erb (0.5ms)
+  Rendered layouts/_messages.html.erb (0.0ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+Completed 200 OK in 4ms (Views: 2.8ms | ActiveRecord: 0.1ms)
+  [1m[36m (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+----------------------------------------
+PostsControllerTest: test_should_get_new
+----------------------------------------
+  [1m[36mPost Load (0.1ms)[0m  [1mSELECT "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT 1[0m  [["id", 980190962]]
+Processing by PostsController#new as HTML
+  Rendered posts/_form.html.erb (1.7ms)
+  Rendered layouts/_navigation_links.html.erb (0.4ms)
+  Rendered layouts/_navigation.html.erb (0.5ms)
+  Rendered layouts/_messages.html.erb (0.0ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+Completed 200 OK in 4ms (Views: 4.1ms | ActiveRecord: 0.0ms)
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+------------------------------------------
+PostsControllerTest: test_should_show_post
+------------------------------------------
+  [1m[35mPost Load (0.1ms)[0m  SELECT "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT 1  [["id", 980190962]]
+Processing by PostsController#show as HTML
+  Parameters: {"id"=>"980190962"}
+  [1m[36mPost Load (0.1ms)[0m  [1mSELECT "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT 1[0m  [["id", "980190962"]]
+  Rendered layouts/_navigation_links.html.erb (0.3ms)
+  Rendered layouts/_navigation.html.erb (0.5ms)
+  Rendered layouts/_messages.html.erb (0.0ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+Completed 200 OK in 3ms (Views: 2.5ms | ActiveRecord: 0.1ms)
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+--------------------------------------------
+PostsControllerTest: test_should_update_post
+--------------------------------------------
+  [1m[35mPost Load (0.2ms)[0m  SELECT "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT 1  [["id", 980190962]]
+Processing by PostsController#update as HTML
+  Parameters: {"post"=>{"email"=>"MyString", "message"=>"MyText", "name"=>"MyString"}, "id"=>"980190962"}
+  [1m[36mPost Load (0.2ms)[0m  [1mSELECT "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT 1[0m  [["id", "980190962"]]
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://test.host/posts/980190962
+Completed 302 Found in 2ms (ActiveRecord: 0.4ms)
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+------------------------------------------
+RsvpTest: test_meals_get_created_correctly
+------------------------------------------
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (1.3ms)[0m  [1mINSERT INTO "rsvps" ("created_at", "declined", "invited_guest_name", "meal", "notes", "num_beef", "num_chicken", "num_veg", "plus_one", "plus_one_name", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING "id"[0m  [["created_at", Wed, 09 Jul 2014 05:15:13 UTC +00:00], ["declined", false], ["invited_guest_name", "Automated Test"], ["meal", "b c c v v v"], ["notes", "Test Notes."], ["num_beef", 1], ["num_chicken", 2], ["num_veg", 3], ["plus_one", true], ["plus_one_name", "Automated Test Guest"], ["updated_at", Wed, 09 Jul 2014 05:15:13 UTC +00:00]]
+  [1m[35m (0.1ms)[0m  ROLLBACK TO SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+---------------------------------------------------
+RsvpTest: test_spreadsheet_rows_get_created_on_save
+---------------------------------------------------
+  [1m[36m (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[36m (112.7ms)[0m  [1mDROP DATABASE IF EXISTS "wedding_test"[0m
+  [1m[35m (229.9ms)[0m  CREATE DATABASE "wedding_test" ENCODING = 'unicode'
+  [1m[36m (112.8ms)[0m  [1mDROP DATABASE IF EXISTS "wedding_test"[0m
+  [1m[35m (229.8ms)[0m  CREATE DATABASE "wedding_test" ENCODING = 'unicode'
+  [1m[36mSQL (0.8ms)[0m  [1mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35m (3.8ms)[0m  CREATE TABLE "posts" ("id" serial primary key, "name" character varying(255), "email" character varying(255), "message" text, "created_at" timestamp, "updated_at" timestamp) 
+  [1m[36m (2.4ms)[0m  [1mCREATE TABLE "rsvps" ("id" serial primary key, "invited_guest_name" character varying(255), "plus_one" boolean, "plus_one_name" character varying(255), "num_beef" integer, "num_chicken" integer, "num_veg" integer, "declined" boolean, "meal" character varying(255), "notes" text, "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35m (0.6ms)[0m  CREATE TABLE "schema_migrations" ("version" character varying(255) NOT NULL) 
+  [1m[36m (0.8ms)[0m  [1mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [1m[35m (0.2ms)[0m  SELECT version FROM "schema_migrations"
+  [1m[36m (0.3ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20140602020838')[0m
+  [1m[35m (0.3ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20140223194125')
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.1ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36m (0.4ms)[0m  [1mALTER TABLE "posts" DISABLE TRIGGER ALL;ALTER TABLE "rsvps" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mFixture Delete (0.2ms)[0m  [1mDELETE FROM "posts"[0m
+  [1m[35mFixture Insert (0.3ms)[0m  INSERT INTO "posts" ("name", "email", "message", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyText', '2014-07-09 05:50:45', '2014-07-09 05:50:45', 980190962)
+  [1m[36mFixture Insert (0.1ms)[0m  [1mINSERT INTO "posts" ("name", "email", "message", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyText', '2014-07-09 05:50:45', '2014-07-09 05:50:45', 298486374)[0m
+  [1m[35m (0.2ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mALTER TABLE "posts" ENABLE TRIGGER ALL;ALTER TABLE "rsvps" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL[0m
+  [1m[35m (0.0ms)[0m  BEGIN
+--------------------------------------------
+PostsControllerTest: test_should_create_post
+--------------------------------------------
+  [1m[36mPost Load (0.7ms)[0m  [1mSELECT "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT 1[0m  [["id", 980190962]]
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "posts"
+Processing by PostsController#create as HTML
+  Parameters: {"post"=>{"email"=>"MyString", "message"=>"MyText", "name"=>"MyString"}}
+Redirected to http://en.wikipedia.org/wiki/User:Mike_Rosoft/Spambot
+Completed 302 Found in 1ms (ActiveRecord: 0.0ms)
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "posts"[0m
+  [1m[35m (0.2ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+---------------------------------------------
+PostsControllerTest: test_should_destroy_post
+---------------------------------------------
+  [1m[35mPost Load (0.3ms)[0m  SELECT "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT 1  [["id", 980190962]]
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "posts"[0m
+Processing by PostsController#destroy as HTML
+  Parameters: {"id"=>"980190962"}
+  [1m[35mPost Load (0.3ms)[0m  SELECT "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT 1  [["id", "980190962"]]
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.3ms)[0m  DELETE FROM "posts" WHERE "posts"."id" = $1  [["id", 980190962]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://test.host/posts
+Completed 302 Found in 3ms (ActiveRecord: 0.7ms)
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "posts"
+  [1m[36m (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+-----------------------------------------
+PostsControllerTest: test_should_get_edit
+-----------------------------------------
+  [1m[36mPost Load (0.2ms)[0m  [1mSELECT "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT 1[0m  [["id", 980190962]]
+Processing by PostsController#edit as HTML
+  Parameters: {"id"=>"980190962"}
+  [1m[35mPost Load (0.2ms)[0m  SELECT "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT 1  [["id", "980190962"]]
+  Rendered posts/_form.html.erb (9.0ms)
+  Rendered layouts/_navigation_links.html.erb (0.6ms)
+  Rendered layouts/_navigation.html.erb (1.4ms)
+  Rendered layouts/_messages.html.erb (0.3ms)
+  Rendered layouts/_footer.html.erb (0.2ms)
+Completed 200 OK in 65ms (Views: 64.2ms | ActiveRecord: 0.2ms)
+  [1m[36m (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+------------------------------------------
+PostsControllerTest: test_should_get_index
+------------------------------------------
+  [1m[36mPost Load (0.2ms)[0m  [1mSELECT "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT 1[0m  [["id", 980190962]]
+Processing by PostsController#index as HTML
+  [1m[35mPost Load (0.2ms)[0m  SELECT "posts".* FROM "posts"
+  Rendered layouts/_navigation_links.html.erb (0.3ms)
+  Rendered layouts/_navigation.html.erb (0.4ms)
+  Rendered layouts/_messages.html.erb (0.0ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+Completed 200 OK in 4ms (Views: 2.5ms | ActiveRecord: 0.2ms)
+  [1m[36m (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+----------------------------------------
+PostsControllerTest: test_should_get_new
+----------------------------------------
+  [1m[36mPost Load (0.2ms)[0m  [1mSELECT "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT 1[0m  [["id", 980190962]]
+Processing by PostsController#new as HTML
+  Rendered posts/_form.html.erb (2.6ms)
+  Rendered layouts/_navigation_links.html.erb (0.3ms)
+  Rendered layouts/_navigation.html.erb (0.4ms)
+  Rendered layouts/_messages.html.erb (0.0ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+Completed 200 OK in 5ms (Views: 4.8ms | ActiveRecord: 0.0ms)
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+------------------------------------------
+PostsControllerTest: test_should_show_post
+------------------------------------------
+  [1m[35mPost Load (0.1ms)[0m  SELECT "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT 1  [["id", 980190962]]
+Processing by PostsController#show as HTML
+  Parameters: {"id"=>"980190962"}
+  [1m[36mPost Load (0.1ms)[0m  [1mSELECT "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT 1[0m  [["id", "980190962"]]
+  Rendered layouts/_navigation_links.html.erb (0.3ms)
+  Rendered layouts/_navigation.html.erb (0.4ms)
+  Rendered layouts/_messages.html.erb (0.0ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+Completed 200 OK in 3ms (Views: 2.4ms | ActiveRecord: 0.1ms)
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+--------------------------------------------
+PostsControllerTest: test_should_update_post
+--------------------------------------------
+  [1m[35mPost Load (0.2ms)[0m  SELECT "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT 1  [["id", 980190962]]
+Processing by PostsController#update as HTML
+  Parameters: {"post"=>{"email"=>"MyString", "message"=>"MyText", "name"=>"MyString"}, "id"=>"980190962"}
+  [1m[36mPost Load (0.2ms)[0m  [1mSELECT "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT 1[0m  [["id", "980190962"]]
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://test.host/posts/980190962
+Completed 302 Found in 3ms (ActiveRecord: 0.4ms)
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+------------------------------------------
+RsvpTest: test_meals_get_created_correctly
+------------------------------------------
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (1.3ms)[0m  [1mINSERT INTO "rsvps" ("created_at", "declined", "invited_guest_name", "meal", "notes", "num_beef", "num_chicken", "num_veg", "plus_one", "plus_one_name", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING "id"[0m  [["created_at", Wed, 09 Jul 2014 05:50:45 UTC +00:00], ["declined", false], ["invited_guest_name", "Automated Test"], ["meal", "b c c v v v"], ["notes", "Test Notes."], ["num_beef", 1], ["num_chicken", 2], ["num_veg", 3], ["plus_one", true], ["plus_one_name", "Automated Test Guest"], ["updated_at", Wed, 09 Jul 2014 05:50:45 UTC +00:00]]
+  [1m[35m (0.1ms)[0m  ROLLBACK TO SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+---------------------------------------------------
+RsvpTest: test_spreadsheet_rows_get_created_on_save
+---------------------------------------------------
+  [1m[36m (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[36m (111.1ms)[0m  [1mDROP DATABASE IF EXISTS "wedding_test"[0m
+  [1m[35m (230.8ms)[0m  CREATE DATABASE "wedding_test" ENCODING = 'unicode'
+  [1m[36mSQL (0.9ms)[0m  [1mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35m (4.1ms)[0m  CREATE TABLE "posts" ("id" serial primary key, "name" character varying(255), "email" character varying(255), "message" text, "created_at" timestamp, "updated_at" timestamp) 
+  [1m[36m (2.8ms)[0m  [1mCREATE TABLE "rsvps" ("id" serial primary key, "invited_guest_name" character varying(255), "plus_one" boolean, "plus_one_name" character varying(255), "num_beef" integer, "num_chicken" integer, "num_veg" integer, "declined" boolean, "meal" character varying(255), "notes" text, "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35m (0.5ms)[0m  CREATE TABLE "schema_migrations" ("version" character varying(255) NOT NULL) 
+  [1m[36m (0.9ms)[0m  [1mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [1m[35m (0.2ms)[0m  SELECT version FROM "schema_migrations"
+  [1m[36m (0.4ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20140602020838')[0m
+  [1m[35m (0.4ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20140223194125')
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.1ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36m (0.4ms)[0m  [1mALTER TABLE "posts" DISABLE TRIGGER ALL;ALTER TABLE "rsvps" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mFixture Delete (0.2ms)[0m  [1mDELETE FROM "posts"[0m
+  [1m[35mFixture Insert (0.2ms)[0m  INSERT INTO "posts" ("name", "email", "message", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyText', '2014-07-09 05:51:13', '2014-07-09 05:51:13', 980190962)
+  [1m[36mFixture Insert (0.1ms)[0m  [1mINSERT INTO "posts" ("name", "email", "message", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyText', '2014-07-09 05:51:13', '2014-07-09 05:51:13', 298486374)[0m
+  [1m[35m (0.2ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mALTER TABLE "posts" ENABLE TRIGGER ALL;ALTER TABLE "rsvps" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL[0m
+  [1m[35m (0.0ms)[0m  BEGIN
+--------------------------------------------
+PostsControllerTest: test_should_create_post
+--------------------------------------------
+  [1m[36mPost Load (0.5ms)[0m  [1mSELECT "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT 1[0m  [["id", 980190962]]
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "posts"
+Processing by PostsController#create as HTML
+  Parameters: {"post"=>{"email"=>"MyString", "message"=>"MyText", "name"=>"MyString"}}
+Redirected to http://en.wikipedia.org/wiki/User:Mike_Rosoft/Spambot
+Completed 302 Found in 1ms (ActiveRecord: 0.0ms)
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "posts"[0m
+  [1m[35m (0.2ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+---------------------------------------------
+PostsControllerTest: test_should_destroy_post
+---------------------------------------------
+  [1m[35mPost Load (0.3ms)[0m  SELECT "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT 1  [["id", 980190962]]
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "posts"[0m
+Processing by PostsController#destroy as HTML
+  Parameters: {"id"=>"980190962"}
+  [1m[35mPost Load (0.2ms)[0m  SELECT "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT 1  [["id", "980190962"]]
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.2ms)[0m  DELETE FROM "posts" WHERE "posts"."id" = $1  [["id", 980190962]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://test.host/posts
+Completed 302 Found in 3ms (ActiveRecord: 0.6ms)
+  [1m[35m (0.3ms)[0m  SELECT COUNT(*) FROM "posts"
+  [1m[36m (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+-----------------------------------------
+PostsControllerTest: test_should_get_edit
+-----------------------------------------
+  [1m[36mPost Load (0.2ms)[0m  [1mSELECT "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT 1[0m  [["id", 980190962]]
+Processing by PostsController#edit as HTML
+  Parameters: {"id"=>"980190962"}
+  [1m[35mPost Load (0.2ms)[0m  SELECT "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT 1  [["id", "980190962"]]
+  Rendered posts/_form.html.erb (42.5ms)
+  Rendered layouts/_navigation_links.html.erb (0.7ms)
+  Rendered layouts/_navigation.html.erb (1.5ms)
+  Rendered layouts/_messages.html.erb (0.3ms)
+  Rendered layouts/_footer.html.erb (0.2ms)
+Completed 200 OK in 70ms (Views: 69.3ms | ActiveRecord: 0.2ms)
+  [1m[36m (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+------------------------------------------
+PostsControllerTest: test_should_get_index
+------------------------------------------
+  [1m[36mPost Load (0.3ms)[0m  [1mSELECT "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT 1[0m  [["id", 980190962]]
+Processing by PostsController#index as HTML
+  [1m[35mPost Load (0.1ms)[0m  SELECT "posts".* FROM "posts"
+  Rendered layouts/_navigation_links.html.erb (0.4ms)
+  Rendered layouts/_navigation.html.erb (0.5ms)
+  Rendered layouts/_messages.html.erb (0.0ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+Completed 200 OK in 4ms (Views: 2.8ms | ActiveRecord: 0.1ms)
+  [1m[36m (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+----------------------------------------
+PostsControllerTest: test_should_get_new
+----------------------------------------
+  [1m[36mPost Load (0.2ms)[0m  [1mSELECT "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT 1[0m  [["id", 980190962]]
+Processing by PostsController#new as HTML
+  Rendered posts/_form.html.erb (1.8ms)
+  Rendered layouts/_navigation_links.html.erb (0.3ms)
+  Rendered layouts/_navigation.html.erb (0.4ms)
+  Rendered layouts/_messages.html.erb (0.0ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+Completed 200 OK in 5ms (Views: 4.4ms | ActiveRecord: 0.0ms)
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+------------------------------------------
+PostsControllerTest: test_should_show_post
+------------------------------------------
+  [1m[35mPost Load (0.2ms)[0m  SELECT "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT 1  [["id", 980190962]]
+Processing by PostsController#show as HTML
+  Parameters: {"id"=>"980190962"}
+  [1m[36mPost Load (0.1ms)[0m  [1mSELECT "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT 1[0m  [["id", "980190962"]]
+  Rendered layouts/_navigation_links.html.erb (0.3ms)
+  Rendered layouts/_navigation.html.erb (0.5ms)
+  Rendered layouts/_messages.html.erb (0.0ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+Completed 200 OK in 3ms (Views: 2.5ms | ActiveRecord: 0.1ms)
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+--------------------------------------------
+PostsControllerTest: test_should_update_post
+--------------------------------------------
+  [1m[35mPost Load (0.1ms)[0m  SELECT "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT 1  [["id", 980190962]]
+Processing by PostsController#update as HTML
+  Parameters: {"post"=>{"email"=>"MyString", "message"=>"MyText", "name"=>"MyString"}, "id"=>"980190962"}
+  [1m[36mPost Load (0.1ms)[0m  [1mSELECT "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT 1[0m  [["id", "980190962"]]
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://test.host/posts/980190962
+Completed 302 Found in 2ms (ActiveRecord: 0.2ms)
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+------------------------------------------
+RsvpTest: test_meals_get_created_correctly
+------------------------------------------
+  [1m[35m (0.2ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (1.3ms)[0m  [1mINSERT INTO "rsvps" ("created_at", "declined", "invited_guest_name", "meal", "notes", "num_beef", "num_chicken", "num_veg", "plus_one", "plus_one_name", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING "id"[0m  [["created_at", Wed, 09 Jul 2014 05:51:13 UTC +00:00], ["declined", false], ["invited_guest_name", "Automated Test"], ["meal", "b c c v v v"], ["notes", "Test Notes."], ["num_beef", 1], ["num_chicken", 2], ["num_veg", 3], ["plus_one", true], ["plus_one_name", "Automated Test Guest"], ["updated_at", Wed, 09 Jul 2014 05:51:13 UTC +00:00]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.2ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+---------------------------------------------------
+RsvpTest: test_spreadsheet_rows_get_created_on_save
+---------------------------------------------------
+  [1m[36m (0.2ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.5ms)[0m  INSERT INTO "rsvps" ("created_at", "declined", "invited_guest_name", "meal", "num_beef", "num_chicken", "num_veg", "plus_one", "plus_one_name", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"  [["created_at", Wed, 09 Jul 2014 05:51:20 UTC +00:00], ["declined", false], ["invited_guest_name", "Automated Test"], ["meal", ""], ["num_beef", 0], ["num_chicken", 0], ["num_veg", 0], ["plus_one", true], ["plus_one_name", "Automated Test Guest"], ["updated_at", Wed, 09 Jul 2014 05:51:20 UTC +00:00]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (107.6ms)[0m  [1mDROP DATABASE IF EXISTS "wedding_test"[0m
+  [1m[35m (231.7ms)[0m  CREATE DATABASE "wedding_test" ENCODING = 'unicode'
+  [1m[36mSQL (0.8ms)[0m  [1mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35m (3.7ms)[0m  CREATE TABLE "posts" ("id" serial primary key, "name" character varying(255), "email" character varying(255), "message" text, "created_at" timestamp, "updated_at" timestamp) 
+  [1m[36m (2.3ms)[0m  [1mCREATE TABLE "rsvps" ("id" serial primary key, "invited_guest_name" character varying(255), "plus_one" boolean, "plus_one_name" character varying(255), "num_beef" integer, "num_chicken" integer, "num_veg" integer, "declined" boolean, "meal" character varying(255), "notes" text, "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35m (0.6ms)[0m  CREATE TABLE "schema_migrations" ("version" character varying(255) NOT NULL) 
+  [1m[36m (0.7ms)[0m  [1mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [1m[35m (0.3ms)[0m  SELECT version FROM "schema_migrations"
+  [1m[36m (0.4ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20140602020838')[0m
+  [1m[35m (0.3ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20140223194125')
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.1ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36m (0.4ms)[0m  [1mALTER TABLE "posts" DISABLE TRIGGER ALL;ALTER TABLE "rsvps" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mFixture Delete (0.2ms)[0m  [1mDELETE FROM "posts"[0m
+  [1m[35mFixture Insert (0.3ms)[0m  INSERT INTO "posts" ("name", "email", "message", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyText', '2014-07-09 06:21:04', '2014-07-09 06:21:04', 980190962)
+  [1m[36mFixture Insert (0.1ms)[0m  [1mINSERT INTO "posts" ("name", "email", "message", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyText', '2014-07-09 06:21:04', '2014-07-09 06:21:04', 298486374)[0m
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mALTER TABLE "posts" ENABLE TRIGGER ALL;ALTER TABLE "rsvps" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+--------------------------------------------
+PostsControllerTest: test_should_create_post
+--------------------------------------------
+  [1m[36mPost Load (0.6ms)[0m  [1mSELECT "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT 1[0m  [["id", 980190962]]
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "posts"
+Processing by PostsController#create as HTML
+  Parameters: {"post"=>{"email"=>"MyString", "message"=>"MyText", "name"=>"MyString"}}
+Redirected to http://en.wikipedia.org/wiki/User:Mike_Rosoft/Spambot
+Completed 302 Found in 1ms (ActiveRecord: 0.0ms)
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "posts"[0m
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+---------------------------------------------
+PostsControllerTest: test_should_destroy_post
+---------------------------------------------
+  [1m[35mPost Load (0.3ms)[0m  SELECT "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT 1  [["id", 980190962]]
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "posts"[0m
+Processing by PostsController#destroy as HTML
+  Parameters: {"id"=>"980190962"}
+  [1m[35mPost Load (0.3ms)[0m  SELECT "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT 1  [["id", "980190962"]]
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.3ms)[0m  DELETE FROM "posts" WHERE "posts"."id" = $1  [["id", 980190962]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://test.host/posts
+Completed 302 Found in 3ms (ActiveRecord: 0.8ms)
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "posts"
+  [1m[36m (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+-----------------------------------------
+PostsControllerTest: test_should_get_edit
+-----------------------------------------
+  [1m[36mPost Load (0.2ms)[0m  [1mSELECT "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT 1[0m  [["id", 980190962]]
+Processing by PostsController#edit as HTML
+  Parameters: {"id"=>"980190962"}
+  [1m[35mPost Load (0.2ms)[0m  SELECT "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT 1  [["id", "980190962"]]
+  Rendered posts/_form.html.erb (38.6ms)
+  Rendered layouts/_navigation_links.html.erb (0.7ms)
+  Rendered layouts/_navigation.html.erb (1.5ms)
+  Rendered layouts/_messages.html.erb (0.3ms)
+  Rendered layouts/_footer.html.erb (0.2ms)
+Completed 200 OK in 73ms (Views: 72.4ms | ActiveRecord: 0.2ms)
+  [1m[36m (0.2ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+------------------------------------------
+PostsControllerTest: test_should_get_index
+------------------------------------------
+  [1m[36mPost Load (0.4ms)[0m  [1mSELECT "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT 1[0m  [["id", 980190962]]
+Processing by PostsController#index as HTML
+  [1m[35mPost Load (0.2ms)[0m  SELECT "posts".* FROM "posts"
+  Rendered layouts/_navigation_links.html.erb (0.3ms)
+  Rendered layouts/_navigation.html.erb (0.4ms)
+  Rendered layouts/_messages.html.erb (0.0ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+Completed 200 OK in 4ms (Views: 2.7ms | ActiveRecord: 0.2ms)
+  [1m[36m (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+----------------------------------------
+PostsControllerTest: test_should_get_new
+----------------------------------------
+  [1m[36mPost Load (0.2ms)[0m  [1mSELECT "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT 1[0m  [["id", 980190962]]
+Processing by PostsController#new as HTML
+  Rendered posts/_form.html.erb (1.6ms)
+  Rendered layouts/_navigation_links.html.erb (0.3ms)
+  Rendered layouts/_navigation.html.erb (0.4ms)
+  Rendered layouts/_messages.html.erb (0.0ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+Completed 200 OK in 4ms (Views: 4.1ms | ActiveRecord: 0.0ms)
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+------------------------------------------
+PostsControllerTest: test_should_show_post
+------------------------------------------
+  [1m[35mPost Load (0.1ms)[0m  SELECT "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT 1  [["id", 980190962]]
+Processing by PostsController#show as HTML
+  Parameters: {"id"=>"980190962"}
+  [1m[36mPost Load (0.1ms)[0m  [1mSELECT "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT 1[0m  [["id", "980190962"]]
+  Rendered layouts/_navigation_links.html.erb (0.3ms)
+  Rendered layouts/_navigation.html.erb (0.4ms)
+  Rendered layouts/_messages.html.erb (0.0ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+Completed 200 OK in 3ms (Views: 2.6ms | ActiveRecord: 0.1ms)
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+--------------------------------------------
+PostsControllerTest: test_should_update_post
+--------------------------------------------
+  [1m[35mPost Load (0.2ms)[0m  SELECT "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT 1  [["id", 980190962]]
+Processing by PostsController#update as HTML
+  Parameters: {"post"=>{"email"=>"MyString", "message"=>"MyText", "name"=>"MyString"}, "id"=>"980190962"}
+  [1m[36mPost Load (0.2ms)[0m  [1mSELECT "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT 1[0m  [["id", "980190962"]]
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://test.host/posts/980190962
+Completed 302 Found in 2ms (ActiveRecord: 0.3ms)
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+------------------------------------------
+RsvpTest: test_meals_get_created_correctly
+------------------------------------------
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (1.9ms)[0m  [1mINSERT INTO "rsvps" ("created_at", "declined", "invited_guest_name", "meal", "notes", "num_beef", "num_chicken", "num_veg", "plus_one", "plus_one_name", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING "id"[0m  [["created_at", Wed, 09 Jul 2014 06:21:04 UTC +00:00], ["declined", false], ["invited_guest_name", "Automated Test"], ["meal", "b c c v v v"], ["notes", "Test Notes."], ["num_beef", 1], ["num_chicken", 2], ["num_veg", 3], ["plus_one", true], ["plus_one_name", "Automated Test Guest"], ["updated_at", Wed, 09 Jul 2014 06:21:04 UTC +00:00]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.2ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+---------------------------------------------------
+RsvpTest: test_spreadsheet_rows_get_created_on_save
+---------------------------------------------------
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.6ms)[0m  INSERT INTO "rsvps" ("created_at", "declined", "invited_guest_name", "meal", "num_beef", "num_chicken", "num_veg", "plus_one", "plus_one_name", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"  [["created_at", Wed, 09 Jul 2014 06:21:09 UTC +00:00], ["declined", false], ["invited_guest_name", "Automated Test"], ["meal", ""], ["num_beef", 0], ["num_chicken", 0], ["num_veg", 0], ["plus_one", true], ["plus_one_name", "Automated Test Guest"], ["updated_at", Wed, 09 Jul 2014 06:21:09 UTC +00:00]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  ROLLBACK

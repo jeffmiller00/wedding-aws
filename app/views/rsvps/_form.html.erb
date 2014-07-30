@@ -1,0 +1,57 @@
+<%= form_for(@rsvp, html: {class: "form-horizontal"}) do |f| %>
+  <% if @rsvp.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@rsvp.errors.count, "error") %> prohibited this rsvp from being saved:</h2>
+
+      <ul>
+      <% @rsvp.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label :invited_guest_name, 'Name', class: 'col-sm-2 control-label' %>
+    <div class="col-sm-10">
+      <%= f.text_field :invited_guest_name, {class: 'form-control', placeholder: 'Your Name Here'} %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :plus_one_name, 'Guest Name', class: 'col-sm-2 control-label' %>
+    <div class="col-sm-10">
+      <%= f.text_field :plus_one_name, {class: 'form-control', placeholder: 'Who will be joining you?'} %>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-3">
+      <%= f.label :num_beef, 'Grilled Filet', class: 'col-sm-3 control-label' %>
+      <%= f.number_field :num_beef, {in: 0..5, step: 1, class: 'form-control'} %>
+    </div>
+    <div class="col-sm-3">
+      <%= f.label :num_chicken, 'Chicken Breast', class: 'col-sm-3 control-label' %>
+      <%= f.number_field :num_chicken, {in: 0..5, step: 1, class: 'form-control'} %>
+    </div>
+    <div class="col-sm-3">
+      <%= f.label :num_veg, 'Farmers Market Ratatouille', class: 'col-sm-12 control-label' %>
+      <%= f.number_field :num_veg, {in: 0..5, step: 1, class: 'form-control'} %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :declined, 'Decline with Regrets', class: 'col-sm-2 control-label' %>
+    <div class="col-sm-3">
+      <%= f.check_box :declined, {class: ''} %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :notes, 'Notes', class: 'col-sm-2 control-label' %>
+    <div class="col-sm-10">
+      <%= f.text_area :notes, {class: 'form-control', placeholder: 'Please note any special requests, dietary resrictions, etc.'} %>
+    </div>
+  </div>
+  <div class="form-group actions">
+    <div class="col-sm-offset-2 col-sm-10">
+      <%= f.submit %>
+    </div>
+  </div>
+<% end %>

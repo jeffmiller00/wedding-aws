@@ -1,0 +1,19 @@
+<h1>Guestbook</h1>
+
+<div class="col-md-8 col-md-offset-2">
+  <%= link_to 'Sign our Guestbook!', new_post_path, {class: 'sign_guestbook'} %><br /><br />
+  <% @posts.each do |post| %>
+    <div class="contentBg">
+      <p><%= post.message %></p>
+      <h6><%= post.name %></h6>
+
+      <% if @is_admin %>
+      <ul style="float: right;">
+        <li><%= link_to 'Show', post %></li>
+        <li><%= link_to 'Edit', edit_post_path(post) %></li>
+        <li><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></li>
+      </ul>
+      <% end %>
+    </div><br />
+  <% end %>
+</div>

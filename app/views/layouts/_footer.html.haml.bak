@@ -1,0 +1,25 @@
+%p#debugging= debug(params) if Rails.env.development?  debug(@guest) if Rails.env.development?
+
+.navbar.navbar-fixed-bottom
+  .navbar-inner
+    .container
+      %ul.nav
+        / li.active is how to do the active tab.
+        %li
+          %a{:title => 'Home', :href => root_path } Home
+        %li
+          %a{:title => 'Our Story', :href => our_story_path } Our Story
+        %li
+          %a{:title => 'The Proposal', :href => proposal_path } The Proposal
+        %li
+          %a{:title => 'Wedding Party', :href => wedding_party_path } Wedding Party
+        %li
+          %a{:title => 'Wedding Events', :href => events_path } Ceremony &amp; Reception
+        %li
+          %a{:title => 'Accommodations', :href => accommodations_path } Accommodations
+        %li
+          %a{:title => 'RSVP', :href => rsvp_path } RSVP
+        %li
+          %a{:title => 'Guestbook', :href => guestbook_path } Guestbook
+        %li
+          %a{:title => 'Regestries', :href => registries_path } Regestries
